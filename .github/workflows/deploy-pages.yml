@@ -3,7 +3,7 @@ name: Deploy site to GitHub Pages
 on:
   push:
     branches:
-      - claude/tizi-wuzou-restaurant-sites-3z9s2y
+      - main
   workflow_dispatch:
 
 permissions:
