@@ -90,6 +90,12 @@ em{ font-style: italic; color: var(--gold); }
 .btn-outline:hover{ border-color:var(--gold); color:var(--gold-light); transform:translateY(-2px); }
 .center-btn{ display:flex; width:max-content; margin:36px auto 0; }
 
+.install-chip{
+  display:flex; align-items:center; gap:8px; background:transparent; border:1px solid rgba(201,162,75,.4);
+  color:var(--gold-light); padding:10px 16px; border-radius:30px; font-size:.8rem; letter-spacing:.5px;
+  cursor:pointer; transition:.3s;
+}
+.install-chip:hover{ background:rgba(201,162,75,.12); border-color:var(--gold); }
 .burger{ display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px; }
 .burger span{ width:24px; height:2px; background:var(--cream); transition:.3s; }
 
@@ -258,6 +264,8 @@ em{ font-style: italic; color: var(--gold); }
   .main-nav.open{ right:0; }
   .burger{ display:flex; }
   .header-actions .btn-whatsapp span{ display:none; }
+  .install-chip{ padding:10px 12px; }
+  .install-chip span{ display:none; }
   .ambiance-grid, .contact-grid{ grid-template-columns:1fr; }
   .ambiance-images{ height:360px; margin-bottom:20px; }
   .gallery-grid{ grid-template-columns:repeat(2,1fr); }

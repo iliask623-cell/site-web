@@ -79,3 +79,28 @@ tabBtns.forEach(btn => {
 
 // ===== Footer year =====
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// ===== PWA: service worker + install prompt =====
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+
+let deferredInstallPrompt = null;
+const installChip = document.getElementById('installChip');
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  installChip.hidden = false;
+});
+installChip.addEventListener('click', async () => {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  installChip.hidden = true;
+});
+window.addEventListener('appinstalled', () => {
+  installChip.hidden = true;
+});
