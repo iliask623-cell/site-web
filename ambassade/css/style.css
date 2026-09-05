@@ -210,6 +210,19 @@ em{ font-style: italic; color: var(--gold); }
 .menu-item-head h3{ font-family:var(--font-serif); font-size:1.15rem; font-weight:500; color:var(--cream); }
 .menu-item .price{ font-family:var(--font-serif); color:var(--gold); font-size:1.1rem; white-space:nowrap; }
 .menu-item p{ color:var(--cream-dim); font-size:.88rem; margin-top:6px; max-width:520px; }
+.menu-subhead{
+  font-family:var(--font-serif); color:var(--gold); font-size:1rem; letter-spacing:.5px;
+  margin:34px 0 6px; text-transform:uppercase; font-size:.8rem;
+}
+.menu-subhead:first-child{ margin-top:0; }
+.fine-tag{ font-family:var(--font-sans); font-size:.72rem; color:var(--cream-dim); font-style:italic; margin-left:6px; }
+.sauce-label{ color:var(--gold-light); font-size:.78rem; letter-spacing:.5px; text-transform:uppercase; margin-top:10px; }
+.sauce-list{ margin-top:8px; display:flex; flex-direction:column; gap:6px; }
+.sauce-list li{
+  display:flex; justify-content:space-between; gap:16px; color:var(--cream-dim);
+  font-size:.88rem; border-bottom:1px dotted rgba(245,240,227,.12); padding-bottom:4px;
+}
+.sauce-list li span:last-child{ color:var(--gold); white-space:nowrap; }
 
 /* Gallery */
 .gallery-section{ background:linear-gradient(180deg, var(--forest), var(--night)); }
