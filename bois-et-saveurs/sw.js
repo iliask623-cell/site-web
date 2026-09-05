@@ -8,7 +8,15 @@ const CORE_ASSETS = [
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/img/carre-agneau-hero.jpg',
-  './assets/img/carre-agneau-post.jpg'
+  './assets/img/carre-agneau-post.jpg',
+  './assets/img/paella.jpg',
+  './assets/img/calamar-farci.jpg',
+  './assets/img/pave-saumon.jpg',
+  './assets/img/entrecote.jpg',
+  './assets/img/roti-boeuf.jpg',
+  './assets/img/cheesecake.jpg',
+  './assets/img/eclairs.jpg',
+  './assets/img/interieur.jpg'
 ];
 
 self.addEventListener('install', (event) => {
