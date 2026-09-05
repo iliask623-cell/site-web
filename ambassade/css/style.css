@@ -289,6 +289,7 @@ em{ font-style: italic; color: var(--gold); }
     transition:right .45s var(--ease); z-index:999; border-left:1px solid rgba(201,162,75,.15); }
   .main-nav.open{ right:0; }
   .burger{ display:flex; }
+  .header-actions{ position:relative; z-index:1001; }
   .header-actions .btn-whatsapp span{ display:none; }
   .install-chip{ padding:10px 12px; }
   .install-chip span{ display:none; }
