@@ -1,7 +1,7 @@
 {
   "name": "L'Ambassade — Restaurant",
   "short_name": "L'Ambassade",
-  "description": "Restaurant à Tizi Ouzou, aux abords du parc zoologique — cuisine raffinée et cadre verdoyant.",
+  "description": "Restaurant à Tizi Ouzou — cuisine raffinée et cadre élégant.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
