@@ -6,7 +6,9 @@ const CORE_ASSETS = [
   './js/script.js',
   './manifest.json',
   './assets/icons/icon-192.png',
-  './assets/icons/icon-512.png'
+  './assets/icons/icon-512.png',
+  './assets/img/carre-agneau-hero.jpg',
+  './assets/img/carre-agneau-post.jpg'
 ];
 
 self.addEventListener('install', (event) => {

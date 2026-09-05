@@ -95,6 +95,7 @@ em{ font-style: italic; color: var(--gold); }
   color:var(--gold-light); padding:10px 16px; border-radius:30px; font-size:.8rem; letter-spacing:.5px;
   cursor:pointer; transition:.3s;
 }
+.install-chip[hidden]{ display:none; }
 .install-chip:hover{ background:rgba(201,162,75,.12); border-color:var(--gold); }
 .burger{ display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px; }
 .burger span{ width:24px; height:2px; background:var(--cream); transition:.3s; }
@@ -107,6 +108,13 @@ em{ font-style: italic; color: var(--gold); }
     repeating-linear-gradient(115deg, rgba(255,255,255,.02) 0px, rgba(255,255,255,.02) 1px, transparent 1px, transparent 5px),
     linear-gradient(160deg, #15100c 0%, #0e0c0a 55%, #100b08 100%);
 }
+.hero-img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%;
+  filter: saturate(.85) brightness(.72) contrast(1.05);
+  transform:scale(1.08); animation:heroZoom 18s ease-out forwards;
+  mix-blend-mode:normal;
+}
+@keyframes heroZoom{ to{ transform:scale(1); } }
 .hero-embers{ position:absolute; inset:0; overflow:hidden; }
 .ember{
   position:absolute; bottom:-10px; width:4px; height:4px; border-radius:50%;
@@ -223,6 +231,14 @@ em{ font-style: italic; color: var(--gold); }
 .ph-tile i{ font-size:2rem; opacity:.8; }
 .ph-tile span{ font-family:var(--font-serif); font-size:.95rem; color:var(--cream-dim); }
 .ph-tile:hover{ transform:scale(1.03); border-color:rgba(201,162,75,.5); }
+.photo-tile{ position:relative; padding:0; overflow:hidden; }
+.photo-tile img{ width:100%; height:100%; object-fit:cover; object-position:center 22%; transition:transform .6s var(--ease); }
+.photo-tile:hover img{ transform:scale(1.08); }
+.photo-tile .tile-caption{
+  position:absolute; left:0; right:0; bottom:0; padding:14px 16px;
+  background:linear-gradient(180deg, transparent, rgba(0,0,0,.75));
+  font-family:var(--font-serif); color:var(--gold-light); font-size:1rem; text-align:left;
+}
 
 /* Contact */
 .contact-section{ background:var(--black); }
