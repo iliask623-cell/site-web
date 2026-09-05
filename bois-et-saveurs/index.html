@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bois & Saveurs | Café Restaurant — Tizi Ouzou</title>
+<meta name="description" content="Bois & Saveurs, café restaurant à Tizi Ouzou. Un lieu où le bois, la lumière et la gastronomie se rencontrent. Grillades au feu de bois, ambiance chic, réservation facile.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0e0c0a">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bois & Saveurs">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="reveal-loader" id="loader"><span>BOIS &amp; SAVEURS</span></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#accueil" class="logo">
+      <span class="logo-mark"><i class="fa-solid fa-fire"></i></span>
+      <span class="logo-text">Bois <em>&amp;</em> Saveurs</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#accueil" class="nav-link active">Accueil</a>
+      <a href="#histoire" class="nav-link">L'Ambiance</a>
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#galerie" class="nav-link">Galerie</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://wa.me/2135XXXXXXXX?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table%20chez%20Bois%20%26%20Saveurs" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> <span>Réserver</span>
+      </a>
+      <button class="install-chip" id="installChip" hidden>
+        <i class="fa-solid fa-mobile-screen-button"></i> <span>Installer</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="accueil">
+    <div class="hero-media">
+      <img src="assets/img/carre-agneau-hero.jpg" alt="Carré d'agneau, plat signature de Bois &amp; Saveurs" class="hero-img">
+      <div class="hero-embers" id="embers"></div>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="container hero-content">
+      <p class="eyebrow reveal">Café Restaurant — Tizi Ouzou</p>
+      <h1 class="reveal">Un lieu où le <em>bois</em>, la <em>lumière</em><br> et la <em>gastronomie</em> se rencontrent</h1>
+      <p class="hero-sub reveal">Saveurs authentiques, ambiance chic, grillades au feu de bois. Avenue Chabane Ahcène, Tizi Ouzou.</p>
+      <div class="hero-cta reveal">
+        <a href="#menu" class="btn btn-primary">Découvrir le menu <i class="fa-solid fa-arrow-down"></i></a>
+        <a href="https://wa.me/2135XXXXXXXX" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-brands fa-whatsapp"></i> Commander</a>
+      </div>
+    </div>
+    <a href="#histoire" class="scroll-cue" aria-label="Défiler"><span></span></a>
+  </section>
+
+  <!-- HISTOIRE / AMBIANCE -->
+  <section class="section ambiance" id="histoire">
+    <div class="container ambiance-grid">
+      <div class="ambiance-images">
+        <div class="ph-card img-a reveal"><i class="fa-solid fa-fire-flame-curved"></i><span>Cuisson au feu de bois</span></div>
+        <div class="ph-card img-b reveal"><i class="fa-solid fa-champagne-glasses"></i><span>Ambiance chic</span></div>
+      </div>
+      <div class="ambiance-text">
+        <p class="eyebrow reveal">Notre histoire</p>
+        <h2 class="reveal">L'authenticité,<br>servie avec élégance</h2>
+        <p class="reveal">Chez Bois &amp; Saveurs, chaque plat raconte une histoire : celle d'une cuisine généreuse, cuite au feu de bois, sublimée dans un cadre pensé pour vos meilleurs moments. Entre pierre, bois brut et lumière tamisée, notre salle vous accueille pour un déjeuner d'affaires, un dîner entre amis ou une soirée en famille.</p>
+        <div class="ambiance-stats reveal">
+          <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Cuisson au feu de bois</span></div>
+          <div class="stat"><span class="stat-num">7j/7</span><span class="stat-label">Ouvert toute la semaine</span></div>
+          <div class="stat"><span class="stat-num">3300+</span><span class="stat-label">Abonnés conquis</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="section menu-section" id="menu">
+    <div class="container">
+      <p class="eyebrow reveal center">Notre carte</p>
+      <h2 class="reveal center">Le Menu</h2>
+      <p class="section-note reveal center">Plats issus de la carte du restaurant — prix indicatifs en attente de confirmation.</p>
+
+      <div class="menu-tabs reveal" role="tablist">
+        <button class="tab-btn active" data-tab="entrees">Entrées</button>
+        <button class="tab-btn" data-tab="grillades">Grillades</button>
+        <button class="tab-btn" data-tab="plats">Plats</button>
+        <button class="tab-btn" data-tab="desserts">Desserts</button>
+        <button class="tab-btn" data-tab="boissons">Boissons</button>
+      </div>
+
+      <div class="menu-panels">
+
+        <div class="menu-panel active" data-panel="entrees">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Salade Bois &amp; Saveurs</h3><span class="price">550 DA</span></div>
+            <p>Mesclun, tomates confites, copeaux de parmesan, vinaigrette au miel</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Soupe du moment</h3><span class="price">450 DA</span></div>
+            <p>Recette de saison, préparée maison</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Bruschettas maison</h3><span class="price">500 DA</span></div>
+            <p>Pain grillé, tomates fraîches, basilic, huile d'olive</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="grillades">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Carré d'agneau</h3><span class="price">2200 DA</span></div>
+            <p>Tendresse et saveurs authentiques, légumes de saison, gratin dauphinois</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Entrecôte grillée</h3><span class="price">1900 DA</span></div>
+            <p>Généreusement accompagnée, sauce au choix</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Rôti de bœuf</h3><span class="price">1700 DA</span></div>
+            <p>Tendre et savoureux, préparé avec soin, riz et gratin</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="plats">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Pavé de saumon, beurre maître d'hôtel</h3><span class="price">1600 DA</span></div>
+            <p>Fait maison, produits frais, herbes fraîches</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Paella</h3><span class="price">1500 DA</span></div>
+            <p>Fruits de mer, crevettes, moules, riz safrané</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Calamar farci</h3><span class="price">1400 DA</span></div>
+            <p>Farce maison, sauce tomate maison</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="desserts">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Cheesecake maison aux agrumes</h3><span class="price">500 DA</span></div>
+            <p>Base biscuitée, crème fraîche, zestes d'agrumes</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Éclairs gourmands</h3><span class="price">350 DA</span></div>
+            <p>Fait maison, garnitures variées</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="boissons">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Café artisanal</h3><span class="price">200 DA</span></div>
+            <p>Espresso, allongé ou cappuccino</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Thé à la menthe</h3><span class="price">250 DA</span></div>
+            <p>Servi à la tradition</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Jus frais pressés</h3><span class="price">400 DA</span></div>
+            <p>Orange, citron, fruits de saison</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="section gallery-section" id="galerie">
+    <div class="container">
+      <p class="eyebrow reveal center">Instagram &amp; ambiance</p>
+      <h2 class="reveal center">Galerie</h2>
+      <div class="gallery-grid">
+        <div class="ph-tile photo-tile reveal">
+          <img src="assets/img/carre-agneau-post.jpg" alt="Carré d'agneau — plat signature Bois &amp; Saveurs" loading="lazy">
+          <span class="tile-caption">Carré d'agneau</span>
+        </div>
+        <div class="ph-tile photo-tile reveal">
+          <img src="assets/img/paella.jpg" alt="Paella aux fruits de mer" loading="lazy">
+          <span class="tile-caption">Paella</span>
+        </div>
+        <div class="ph-tile photo-tile reveal">
+          <img src="assets/img/calamar-farci.jpg" alt="Calamar farci" loading="lazy">
+          <span class="tile-caption">Calamar farci</span>
+        </div>
+        <div class="ph-tile photo-tile reveal">
+          <img src="assets/img/pave-saumon.jpg" alt="Pavé de saumon, beurre maître d'hôtel" loading="lazy">
+          <span class="tile-caption">Pavé de saumon</span>
+        </div>
+        <div class="ph-tile photo-tile reveal">
+          <img src="assets/img/entrecote.jpg" alt="Entrecôte grillée" loading="lazy">
+          <span class="tile-caption">Entrecôte grillée</span>
+        </div>
+        <div class="ph-tile photo-tile reveal">
+          <img src="assets/img/roti-boeuf.jpg" alt="Rôti de bœuf" loading="lazy">
+          <span class="tile-caption">Rôti de bœuf</span>
+        </div>
+        <div class="ph-tile photo-tile reveal">
+          <img src="assets/img/cheesecake.jpg" alt="Cheesecake maison aux agrumes" loading="lazy">
+          <span class="tile-caption">Cheesecake maison</span>
+        </div>
+        <div class="ph-tile photo-tile reveal">
+          <img src="assets/img/eclairs.jpg" alt="Éclairs gourmands" loading="lazy">
+          <span class="tile-caption">Éclairs gourmands</span>
+        </div>
+        <div class="ph-tile photo-tile reveal">
+          <img src="assets/img/interieur.jpg" alt="Intérieur du restaurant Bois &amp; Saveurs" loading="lazy">
+          <span class="tile-caption">L'ambiance</span>
+        </div>
+      </div>
+      <a href="https://www.instagram.com/restaurantboisetsaveurs/" target="_blank" rel="noopener" class="btn btn-outline reveal center-btn">
+        <i class="fa-brands fa-instagram"></i> Voir plus sur Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-section" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info reveal">
+        <p class="eyebrow">Nous trouver</p>
+        <h2>Réservez votre table</h2>
+        <ul class="info-list">
+          <li><i class="fa-solid fa-location-dot"></i> Avenue Chabane Ahcène, Tizi Ouzou, Algérie</li>
+          <li><i class="fa-solid fa-clock"></i> Ouvert tous les jours de 8h à 22h30</li>
+          <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/2135XXXXXXXX">+213 5XX XX XX XX</a></li>
+          <li><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/restaurantboisetsaveurs/" target="_blank" rel="noopener">@restaurantboisetsaveurs</a></li>
+        </ul>
+        <div class="contact-cta">
+          <a href="https://wa.me/2135XXXXXXXX?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table" target="_blank" rel="noopener" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Réserver sur WhatsApp</a>
+          <a href="https://share.google/dxjNesCasmql5I5pE" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-solid fa-diamond-turn-right"></i> Itinéraire</a>
+        </div>
+      </div>
+      <div class="contact-map reveal">
+        <iframe
+          src="https://www.google.com/maps?q=Avenue%20Chabane%20Ahcene%2C%20Tizi%20Ouzou%2C%20Alg%C3%A9rie&output=embed"
+          width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localisation Bois et Saveurs"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">Bois <em>&amp;</em> Saveurs</span>
+      <p>Café Restaurant — Tizi Ouzou</p>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/restaurantboisetsaveurs/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://wa.me/2135XXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <p class="footer-copy">&copy; <span id="year"></span> Bois &amp; Saveurs. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/2135XXXXXXXX" target="_blank" rel="noopener" class="float-whatsapp" aria-label="Commander sur WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script src="js/script.js"></script>
+</body>
+</html>
