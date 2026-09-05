@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Ambassade | Restaurant — Tizi Ouzou</title>
+<meta name="description" content="L'Ambassade, restaurant à Tizi Ouzou, aux abords du parc zoologique. Cuisine raffinée, cadre verdoyant et ambiance élégante entre nature et gastronomie.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d1610">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="L'Ambassade">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="reveal-loader" id="loader"><span>L'AMBASSADE</span></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#accueil" class="logo">
+      <span class="logo-mark"><i class="fa-solid fa-kiwi-bird"></i></span>
+      <span class="logo-text">L'<em>Ambassade</em></span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#accueil" class="nav-link active">Accueil</a>
+      <a href="#histoire" class="nav-link">L'Ambiance</a>
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#galerie" class="nav-link">Galerie</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table%20%C3%A0%20L%27Ambassade" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> <span>Réserver</span>
+      </a>
+      <button class="install-chip" id="installChip" hidden>
+        <i class="fa-solid fa-mobile-screen-button"></i> <span>Installer</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="accueil">
+    <div class="hero-media">
+      <div class="hero-fireflies" id="fireflies"></div>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="container hero-content">
+      <p class="eyebrow reveal">Restaurant — Tizi Ouzou</p>
+      <h1 class="reveal">Une <em>escale</em> raffinée<br> aux portes du <em>parc</em> et de sa <em>faune</em></h1>
+      <p class="hero-sub reveal">Cuisine soignée, service élégant et verdure environnante : L'Ambassade réunit le confort d'une grande table et la sérénité d'un jardin zoologique.</p>
+      <div class="hero-cta reveal">
+        <a href="#menu" class="btn btn-primary">Découvrir le menu <i class="fa-solid fa-arrow-down"></i></a>
+        <a href="https://wa.me/213XXXXXXXXX" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-brands fa-whatsapp"></i> Commander</a>
+      </div>
+    </div>
+    <a href="#histoire" class="scroll-cue" aria-label="Défiler"><span></span></a>
+  </section>
+
+  <!-- HISTOIRE / AMBIANCE -->
+  <section class="section ambiance" id="histoire">
+    <div class="container ambiance-grid">
+      <div class="ambiance-images">
+        <div class="ph-card img-a reveal"><i class="fa-solid fa-tree"></i><span>Cadre verdoyant</span></div>
+        <div class="ph-card img-b reveal"><i class="fa-solid fa-champagne-glasses"></i><span>Service élégant</span></div>
+      </div>
+      <div class="ambiance-text">
+        <p class="eyebrow reveal">Notre histoire</p>
+        <h2 class="reveal">Le raffinement,<br>à l'ombre des grands arbres</h2>
+        <p class="reveal">À L'Ambassade, la table se dresse au cœur d'un écrin de verdure, aux abords du parc zoologique de Tizi Ouzou. Ici, la cuisine généreuse et soignée se savoure dans un cadre apaisant, entre chants d'oiseaux et lumière filtrée par les frondaisons — idéal pour un déjeuner d'affaires, un dîner en famille ou une sortie entre amis.</p>
+        <div class="ambiance-stats reveal">
+          <div class="stat"><span class="stat-num">#1</span><span class="stat-label">Restaurant à Tizi Ouzou*</span></div>
+          <div class="stat"><span class="stat-num">4.7<i class="fa-solid fa-star"></i></span><span class="stat-label">Avis clients*</span></div>
+          <div class="stat"><span class="stat-num">7j/7</span><span class="stat-label">Ouvert toute la semaine</span></div>
+        </div>
+        <p class="fine-print reveal">*Classement et note à confirmer avant mise en ligne.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="section menu-section" id="menu">
+    <div class="container">
+      <p class="eyebrow reveal center">Notre carte</p>
+      <h2 class="reveal center">Le Menu</h2>
+      <p class="section-note reveal center">Exemple de structure — en attente de la carte définitive du restaurant.</p>
+
+      <div class="menu-tabs reveal" role="tablist">
+        <button class="tab-btn active" data-tab="entrees">Entrées</button>
+        <button class="tab-btn" data-tab="grillades">Grillades</button>
+        <button class="tab-btn" data-tab="plats">Plats</button>
+        <button class="tab-btn" data-tab="desserts">Desserts</button>
+        <button class="tab-btn" data-tab="boissons">Boissons</button>
+      </div>
+
+      <div class="menu-panels">
+
+        <div class="menu-panel active" data-panel="entrees">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Salade L'Ambassade</h3><span class="price">-- DA</span></div>
+            <p>À préciser selon la carte du restaurant</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Soupe du moment</h3><span class="price">-- DA</span></div>
+            <p>À préciser selon la carte du restaurant</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Entrée du chef</h3><span class="price">-- DA</span></div>
+            <p>À préciser selon la carte du restaurant</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="grillades">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Grillade signature</h3><span class="price">-- DA</span></div>
+            <p>À préciser selon la carte du restaurant</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Brochettes</h3><span class="price">-- DA</span></div>
+            <p>À préciser selon la carte du restaurant</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="plats">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Plat traditionnel</h3><span class="price">-- DA</span></div>
+            <p>À préciser selon la carte du restaurant</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Spécialité de la maison</h3><span class="price">-- DA</span></div>
+            <p>À préciser selon la carte du restaurant</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="desserts">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Dessert maison</h3><span class="price">-- DA</span></div>
+            <p>À préciser selon la carte du restaurant</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="boissons">
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Café artisanal</h3><span class="price">-- DA</span></div>
+            <p>Espresso, allongé ou cappuccino</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Thé à la menthe</h3><span class="price">-- DA</span></div>
+            <p>Servi à la tradition</p>
+          </div>
+          <div class="menu-item reveal">
+            <div class="menu-item-head"><h3>Jus frais pressés</h3><span class="price">-- DA</span></div>
+            <p>Orange, citron, fruits de saison</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="section gallery-section" id="galerie">
+    <div class="container">
+      <p class="eyebrow reveal center">Instagram &amp; ambiance</p>
+      <h2 class="reveal center">Galerie</h2>
+      <p class="section-note reveal center">Emplacements réservés — à remplacer par les photos du restaurant.</p>
+      <div class="gallery-grid">
+        <div class="ph-tile reveal"><i class="fa-solid fa-utensils"></i><span>Salle du restaurant</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-tree"></i><span>Terrasse verdoyante</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-kiwi-bird"></i><span>Aux abords du parc</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-plate-wheat"></i><span>Plat signature</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-champagne-glasses"></i><span>Ambiance soirée</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-leaf"></i><span>Cadre naturel</span></div>
+      </div>
+      <a href="https://www.instagram.com/ambassade.restaurant/" target="_blank" rel="noopener" class="btn btn-outline reveal center-btn">
+        <i class="fa-brands fa-instagram"></i> Voir plus sur Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-section" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info reveal">
+        <p class="eyebrow">Nous trouver</p>
+        <h2>Réservez votre table</h2>
+        <ul class="info-list">
+          <li><i class="fa-solid fa-location-dot"></i> Tizi Ouzou, Algérie — adresse exacte à confirmer</li>
+          <li><i class="fa-solid fa-clock"></i> Horaires à confirmer</li>
+          <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/213XXXXXXXXX">+213 XX XX XX XX</a></li>
+          <li><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/ambassade.restaurant/" target="_blank" rel="noopener">@ambassade.restaurant</a></li>
+        </ul>
+        <div class="contact-cta">
+          <a href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table" target="_blank" rel="noopener" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Réserver sur WhatsApp</a>
+          <a href="#" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-solid fa-diamond-turn-right"></i> Itinéraire</a>
+        </div>
+      </div>
+      <div class="contact-map reveal">
+        <iframe
+          src="https://www.google.com/maps?q=Tizi%20Ouzou%2C%20Alg%C3%A9rie&output=embed"
+          width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localisation L'Ambassade"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">L'<em>Ambassade</em></span>
+      <p>Restaurant — Tizi Ouzou</p>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/ambassade.restaurant/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.facebook.com/lambassaderesto/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://wa.me/213XXXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <p class="footer-copy">&copy; <span id="year"></span> L'Ambassade. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/213XXXXXXXXX" target="_blank" rel="noopener" class="float-whatsapp" aria-label="Commander sur WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script src="js/script.js"></script>
+</body>
+</html>
