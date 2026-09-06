@@ -284,18 +284,18 @@ em{ font-style: italic; }
 
 /* ===== Footer ===== */
 .footer{
-  background:var(--ivory); color:var(--ink); padding:56px 24px; text-align:center;
-  border-top:1px solid var(--gold-line-ink);
+  background:var(--black); color:var(--cream); padding:56px 24px; text-align:center;
+  border-top:1px solid var(--gold-line);
 }
 .footer-seal{ width:56px; height:56px; border-radius:50%; margin:0 auto 16px; }
 .footer-name{ font-family:var(--font-display); font-size:1.1rem; letter-spacing:1.5px; }
-.footer-sub{ font-family:var(--font-serif); font-style:italic; color:var(--ink-dim); font-size:.9rem; margin-top:4px; }
+.footer-sub{ font-family:var(--font-serif); font-style:italic; color:var(--cream-dim); font-size:.9rem; margin-top:4px; }
 .footer-social{ display:flex; justify-content:center; gap:16px; margin:24px 0; }
 .footer-social a{
-  width:36px; height:36px; border:1px solid var(--gold-line-ink); border-radius:50%;
-  display:flex; align-items:center; justify-content:center; color:var(--ink); transition:.3s;
+  width:36px; height:36px; border:1px solid var(--gold-line); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; color:var(--cream); transition:.3s;
 }
-.footer-social a:hover{ border-color:var(--gold-deep); color:var(--gold-deep); transform:translateY(-2px); }
+.footer-social a:hover{ border-color:var(--gold); color:var(--gold-light); transform:translateY(-2px); }
 .footer-copy{ font-size:.75rem; opacity:.6; }
 
 /* ===== Floating WhatsApp ===== */
