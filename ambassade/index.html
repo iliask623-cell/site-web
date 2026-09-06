@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L'Ambassade | Restaurant — Tizi Ouzou</title>
-<meta name="description" content="L'Ambassade, restaurant à Tizi Ouzou. Cuisine raffinée, cadre élégant et service soigné pour vos déjeuners d'affaires, dîners et moments entre amis.">
+<title>L'Ambassade | Restaurant depuis 1988 — Tizi Ouzou</title>
+<meta name="description" content="L'Ambassade, restaurant à Tizi Ouzou depuis 1988. Cuisine raffinée, cadre élégant et service soigné pour vos déjeuners d'affaires, dîners et moments entre amis.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0a0806">
+<meta name="theme-color" content="#08070a">
 <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -25,342 +25,276 @@
 
 <div class="reveal-loader" id="loader">
   <div class="loader-inner">
-    <img src="assets/img/logo-crest.png" alt="" class="loader-crest">
-    <span>L'AMBASSADE</span>
+    <img src="assets/img/logo-badge.png" alt="" class="loader-seal">
   </div>
 </div>
 
-<header class="site-header" id="siteHeader">
-  <div class="container header-inner">
-    <a href="#accueil" class="logo">
-      <img src="assets/icons/icon-192.png" alt="" class="logo-mark-img" width="42" height="42">
-      <span class="logo-text">L'<em>Ambassade</em></span>
-    </a>
-
-    <nav class="main-nav" id="mainNav">
-      <a href="#accueil" class="nav-link active">Accueil</a>
-      <a href="#histoire" class="nav-link">L'Ambiance</a>
-      <a href="#menu" class="nav-link">Menu</a>
-      <a href="#galerie" class="nav-link">Galerie</a>
-      <a href="#contact" class="nav-link">Contact</a>
-    </nav>
-
-    <div class="header-actions">
-      <a href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table%20%C3%A0%20L%27Ambassade" target="_blank" rel="noopener" class="btn btn-whatsapp">
-        <i class="fa-brands fa-whatsapp"></i> <span>Réserver</span>
-      </a>
-      <button class="install-chip" id="installChip" hidden>
-        <i class="fa-solid fa-mobile-screen-button"></i> <span>Installer</span>
-      </button>
-      <button class="burger" id="burger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
+<header class="masthead" id="siteHeader">
+  <a href="#accueil" class="masthead-brand">
+    <img src="assets/img/logo-badge.png" alt="L'Ambassade" class="masthead-seal">
+    <span class="masthead-name">L'Ambassade<em>Depuis 1988</em></span>
+  </a>
+  <a href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table%20%C3%A0%20L%27Ambassade" target="_blank" rel="noopener" class="stamp-btn masthead-cta">
+    <span>Réserver</span>
+  </a>
+  <button class="index-toggle" id="indexToggle" aria-label="Sommaire" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<nav class="rail" id="rail">
+  <a href="#accueil" class="rail-link active" data-index="I"><span>Accueil</span></a>
+  <a href="#histoire" class="rail-link" data-index="II"><span>Histoire</span></a>
+  <a href="#menu" class="rail-link" data-index="III"><span>Menu</span></a>
+  <a href="#galerie" class="rail-link" data-index="IV"><span>Galerie</span></a>
+  <a href="#contact" class="rail-link" data-index="V"><span>Contact</span></a>
+</nav>
+
+<div class="index-overlay" id="indexOverlay">
+  <a href="#accueil" class="index-overlay-link">I — Accueil</a>
+  <a href="#histoire" class="index-overlay-link">II — Histoire</a>
+  <a href="#menu" class="index-overlay-link">III — Menu</a>
+  <a href="#galerie" class="index-overlay-link">IV — Galerie</a>
+  <a href="#contact" class="index-overlay-link">V — Contact</a>
+  <a href="https://wa.me/213XXXXXXXXX" target="_blank" rel="noopener" class="index-overlay-link index-overlay-cta">Réserver sur WhatsApp</a>
+</div>
 
 <main>
 
   <!-- HERO -->
   <section class="hero" id="accueil">
-    <div class="hero-media">
-      <div class="hero-fireflies" id="fireflies"></div>
-      <div class="hero-overlay"></div>
-    </div>
-    <div class="container hero-frame">
-      <div class="hero-grid">
-        <div class="hero-main">
-          <p class="eyebrow reveal">Restaurant — Tizi Ouzou</p>
-          <h1 class="reveal">Une <em>escale</em> raffinée<br> au cœur de <em>Tizi Ouzou</em></h1>
-          <p class="hero-sub reveal">Cuisine soignée, service élégant et cadre chaleureux : L'Ambassade réunit le confort d'une grande table et la sérénité d'un lieu pensé pour vos meilleurs moments.</p>
-          <div class="hero-cta reveal">
-            <a href="#menu" class="btn btn-primary">Découvrir le menu <i class="fa-solid fa-arrow-down"></i></a>
-            <a href="https://wa.me/213XXXXXXXXX" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-brands fa-whatsapp"></i> Commander</a>
-          </div>
-        </div>
-        <div class="hero-plaque reveal">
-          <img src="assets/img/logo-crest.png" alt="Blason L'Ambassade" class="hero-plaque-crest">
-          <p class="hero-plaque-tag">Bonne cuisine,<br>bons moments,<br>belle ambiance.</p>
-          <div class="ornament-rule small"><span></span></div>
-          <p class="hero-plaque-loc">Tizi Ouzou<br>Algérie</p>
-        </div>
+    <span class="hero-watermark" aria-hidden="true">1988</span>
+    <div class="hero-inner">
+      <img src="assets/img/logo-badge.png" alt="L'Ambassade" class="hero-seal reveal">
+      <p class="kicker reveal">Restaurant à Tizi Ouzou — Algérie</p>
+      <h1 class="reveal">L'Ambassade</h1>
+      <p class="hero-motto reveal"><em>Bonne cuisine, bons moments, belle ambiance.</em></p>
+      <div class="hero-actions reveal">
+        <a href="#menu" class="stamp-btn stamp-btn-lg">Voir le menu</a>
+        <a href="https://wa.me/213XXXXXXXXX" target="_blank" rel="noopener" class="stamp-btn stamp-btn-outline">Réserver une table</a>
       </div>
     </div>
-    <a href="#histoire" class="scroll-cue" aria-label="Défiler"><span></span></a>
   </section>
 
-  <!-- HISTOIRE / AMBIANCE -->
-  <section class="section ambiance" id="histoire">
-    <div class="container ambiance-grid">
-      <div class="ambiance-frame reveal">
-        <img src="assets/img/logo-crest.png" alt="" class="ambiance-watermark" aria-hidden="true">
-        <span class="ambiance-frame-label">Cadre élégant &amp; service soigné</span>
-      </div>
-      <div class="ambiance-text">
-        <p class="eyebrow reveal">Notre histoire</p>
-        <h2 class="reveal">Le raffinement,<br>au service du goût</h2>
-        <p class="reveal">À L'Ambassade, la table se dresse au cœur de Tizi Ouzou, dans un cadre pensé pour vos meilleurs moments. Ici, la cuisine généreuse et soignée se savoure dans une ambiance apaisante et élégante — idéale pour un déjeuner d'affaires, un dîner en famille ou une sortie entre amis.</p>
-        <p class="fine-print reveal">*Classement et note à confirmer avant mise en ligne.</p>
-      </div>
-    </div>
+  <!-- HISTOIRE -->
+  <section class="section paper" id="histoire">
     <div class="container">
-      <div class="ambiance-stats reveal">
-        <div class="stat"><span class="stat-num">#1</span><span class="stat-label">Restaurant à Tizi Ouzou*</span></div>
-        <div class="stat"><span class="stat-num">4.7<i class="fa-solid fa-star"></i></span><span class="stat-label">Avis clients*</span></div>
-        <div class="stat"><span class="stat-num">7j/7</span><span class="stat-label">Ouvert toute la semaine</span></div>
+      <div class="cert-card reveal">
+        <div class="cert-seal"><img src="assets/img/logo-badge.png" alt=""></div>
+        <p class="kicker center">Notre histoire</p>
+        <h2 class="center">Une adresse de confiance<br>depuis 1988</h2>
+        <p class="cert-text">À L'Ambassade, la table se dresse au cœur de Tizi Ouzou depuis près de quarante ans. Ici, la cuisine généreuse et soignée se savoure dans un cadre pensé pour vos meilleurs moments — un déjeuner d'affaires, un dîner en famille ou une sortie entre amis.</p>
+        <div class="cert-stats">
+          <div class="cert-stat"><span class="cert-num">1988</span><small>Année de création</small></div>
+          <div class="cert-stat"><span class="cert-num">#1</span><small>Restaurant à Tizi Ouzou*</small></div>
+          <div class="cert-stat"><span class="cert-num">4.7</span><small>Avis clients*</small></div>
+        </div>
+        <p class="fine-print center">*Classement et note à confirmer avant mise en ligne.</p>
       </div>
     </div>
   </section>
 
   <!-- MENU -->
-  <section class="section menu-section" id="menu">
+  <section class="section ink" id="menu">
     <div class="container">
-      <div class="ornament-rule center"><span></span></div>
-      <p class="eyebrow reveal center">Notre carte</p>
-      <h2 class="reveal center">Le Menu</h2>
-      <p class="section-note reveal center"><em>Bonne cuisine, bons moments, belle ambiance.</em></p>
+      <p class="kicker center">Notre carte</p>
+      <h2 class="center">Le Menu</h2>
 
-      <div class="menu-layout">
-        <div class="menu-tabs reveal" role="tablist">
-          <span class="menu-tabs-label">Sommaire</span>
-          <button class="tab-btn active" data-tab="froides"><em>01</em>Entrées froides</button>
-          <button class="tab-btn" data-tab="chaudes"><em>02</em>Entrées chaudes</button>
-          <button class="tab-btn" data-tab="brunch"><em>03</em>Brunch</button>
-          <button class="tab-btn" data-tab="pates"><em>04</em>Pâtes</button>
-          <button class="tab-btn" data-tab="viandes"><em>05</em>Viandes</button>
-          <button class="tab-btn" data-tab="poissons"><em>06</em>Poissons</button>
-          <button class="tab-btn" data-tab="plats"><em>07</em>Nos plats</button>
-          <button class="tab-btn" data-tab="desserts"><em>08</em>Desserts</button>
-        </div>
+      <div class="dossier">
 
-        <div class="menu-panels">
-
-        <div class="menu-panel active" data-panel="froides">
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Tomates mozzarella</h3><span class="price">900 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Salade César</h3><span class="price">900 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Roulé de concombre au saumon fumé</h3><span class="price">1500 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Salade burrata</h3><span class="price">1200 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Avocat crevettes / saumon</h3><span class="price">1800 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Salade de crudités</h3><span class="price">600 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Salade variée</h3><span class="price">900 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Salade Ambassadeur</h3><span class="price">1800 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Charcuterie &amp; fromages à partager</h3></div>
-            <ul class="sauce-list">
-              <li><span>2 personnes</span><span>1500 DA</span></li>
-              <li><span>3 personnes</span><span>2500 DA</span></li>
-            </ul>
+        <div class="dossier-item" data-panel="froides">
+          <button class="dossier-head" aria-expanded="true">
+            <span class="dossier-num">01</span><span class="dossier-title">Entrées froides</span><span class="dossier-chevron"></span>
+          </button>
+          <div class="dossier-body">
+            <div class="menu-item"><div class="menu-item-head"><h3>Tomates mozzarella</h3><span class="price">900 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Salade César</h3><span class="price">900 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Roulé de concombre au saumon fumé</h3><span class="price">1500 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Salade burrata</h3><span class="price">1200 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Avocat crevettes / saumon</h3><span class="price">1800 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Salade de crudités</h3><span class="price">600 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Salade variée</h3><span class="price">900 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Salade Ambassadeur</h3><span class="price">1800 DA</span></div></div>
+            <div class="menu-item">
+              <div class="menu-item-head"><h3>Charcuterie &amp; fromages à partager</h3></div>
+              <ul class="sauce-list">
+                <li><span>2 personnes</span><span>1500 DA</span></li>
+                <li><span>3 personnes</span><span>2500 DA</span></li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div class="menu-panel" data-panel="chaudes">
-          <p class="menu-subhead reveal">Entrées chaudes</p>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Croustillant de camembert</h3><span class="price">1400 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Fondant de camembert</h3><span class="price">1400 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Tempura de crevettes</h3><span class="price">1500 DA</span></div>
-          </div>
-          <p class="menu-subhead reveal">Gratins</p>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Gratin de poulet</h3><span class="price">900 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Gratin de viande hachée</h3><span class="price">1000 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Gratin de fruits de mer</h3><span class="price">1400 DA</span></div>
+        <div class="dossier-item" data-panel="chaudes">
+          <button class="dossier-head" aria-expanded="false">
+            <span class="dossier-num">02</span><span class="dossier-title">Entrées chaudes &amp; gratins</span><span class="dossier-chevron"></span>
+          </button>
+          <div class="dossier-body">
+            <p class="menu-subhead">Entrées chaudes</p>
+            <div class="menu-item"><div class="menu-item-head"><h3>Croustillant de camembert</h3><span class="price">1400 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Fondant de camembert</h3><span class="price">1400 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Tempura de crevettes</h3><span class="price">1500 DA</span></div></div>
+            <p class="menu-subhead">Gratins</p>
+            <div class="menu-item"><div class="menu-item-head"><h3>Gratin de poulet</h3><span class="price">900 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Gratin de viande hachée</h3><span class="price">1000 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Gratin de fruits de mer</h3><span class="price">1400 DA</span></div></div>
           </div>
         </div>
 
-        <div class="menu-panel" data-panel="brunch">
-          <p class="section-note reveal" style="margin-bottom:20px;">Servi de 14h à 18h</p>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Sandwich filet de bœuf aux champignons</h3><span class="price">1800 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Club sandwich poulet fumé</h3><span class="price">1100 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Sandwich tomate mozzarella</h3><span class="price">950 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Croissant norvégien</h3><span class="price">1400 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Brioche aux crevettes</h3><span class="price">1400 DA</span></div>
+        <div class="dossier-item" data-panel="brunch">
+          <button class="dossier-head" aria-expanded="false">
+            <span class="dossier-num">03</span><span class="dossier-title">Brunch <small>14h – 18h</small></span><span class="dossier-chevron"></span>
+          </button>
+          <div class="dossier-body">
+            <div class="menu-item"><div class="menu-item-head"><h3>Sandwich filet de bœuf aux champignons</h3><span class="price">1800 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Club sandwich poulet fumé</h3><span class="price">1100 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Sandwich tomate mozzarella</h3><span class="price">950 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Croissant norvégien</h3><span class="price">1400 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Brioche aux crevettes</h3><span class="price">1400 DA</span></div></div>
           </div>
         </div>
 
-        <div class="menu-panel" data-panel="pates">
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Tagliatelles Alfredo</h3><span class="price">1100 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Penne César au poulet</h3><span class="price">1100 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Spaghetti à l'arrabiata</h3><span class="price">1200 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Tagliatelles scoglio</h3><span class="price">2200 DA</span></div>
+        <div class="dossier-item" data-panel="pates">
+          <button class="dossier-head" aria-expanded="false">
+            <span class="dossier-num">04</span><span class="dossier-title">Pâtes</span><span class="dossier-chevron"></span>
+          </button>
+          <div class="dossier-body">
+            <div class="menu-item"><div class="menu-item-head"><h3>Tagliatelles Alfredo</h3><span class="price">1100 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Penne César au poulet</h3><span class="price">1100 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Spaghetti à l'arrabiata</h3><span class="price">1200 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Tagliatelles scoglio</h3><span class="price">2200 DA</span></div></div>
           </div>
         </div>
 
-        <div class="menu-panel" data-panel="viandes">
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Entrecôte</h3><span class="price">2100 DA</span></div>
-            <p class="sauce-label">Les sauces</p>
-            <ul class="sauce-list">
-              <li><span>Forestière</span><span>600 DA</span></li>
-              <li><span>À la Véronaise</span><span>700 DA</span></li>
-              <li><span>Roquefort</span><span>800 DA</span></li>
-              <li><span>Robert</span><span>700 DA</span></li>
-            </ul>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Suprême de poulet</h3><span class="price">1200 DA</span></div>
-            <p class="sauce-label">Les sauces</p>
-            <ul class="sauce-list">
-              <li><span>Crème champignons</span><span>500 DA</span></li>
-              <li><span>Aux herbes et citron</span><span>500 DA</span></li>
-              <li><span>Grand-mère</span><span>700 DA</span></li>
-              <li><span>Bourguignon</span><span>700 DA</span></li>
-            </ul>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Rumsteak</h3><span class="price">2250 DA</span></div>
-            <p class="sauce-label">Les sauces</p>
-            <ul class="sauce-list">
-              <li><span>Chasseur</span><span>500 DA</span></li>
-              <li><span>Moutarde</span><span>500 DA</span></li>
-              <li><span>À la japonaise</span><span>600 DA</span></li>
-            </ul>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Foie</h3><span class="price">2400 DA</span></div>
-            <p class="sauce-label">Les sauces</p>
-            <ul class="sauce-list">
-              <li><span>Crème à l'ail</span><span>600 DA</span></li>
-              <li><span>Sauté à l'ail</span><span>500 DA</span></li>
-              <li><span>Sauce rouge</span><span>500 DA</span></li>
-            </ul>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Filet</h3><span class="price">2400 DA</span></div>
-            <p class="sauce-label">Les sauces</p>
-            <ul class="sauce-list">
-              <li><span>Au poivre</span><span>500 DA</span></li>
-              <li><span>Mignon aux champignons</span><span>600 DA</span></li>
-              <li><span>Flambé au cognac</span><span>900 DA</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="menu-panel" data-panel="poissons">
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Poissons <span class="fine-tag">(selon arrivage)</span></h3></div>
-            <p class="sauce-label">Les sauces</p>
-            <ul class="sauce-list">
-              <li><span>Chimichurri</span><span>700 DA</span></li>
-              <li><span>Thaï</span><span>600 DA</span></li>
-              <li><span>Dieppoise</span><span>700 DA</span></li>
-              <li><span>Pesto</span><span>700 DA</span></li>
-              <li><span>Meunière</span><span>500 DA</span></li>
-            </ul>
+        <div class="dossier-item" data-panel="viandes">
+          <button class="dossier-head" aria-expanded="false">
+            <span class="dossier-num">05</span><span class="dossier-title">Viandes</span><span class="dossier-chevron"></span>
+          </button>
+          <div class="dossier-body">
+            <div class="menu-item">
+              <div class="menu-item-head"><h3>Entrecôte</h3><span class="price">2100 DA</span></div>
+              <p class="sauce-label">Les sauces</p>
+              <ul class="sauce-list">
+                <li><span>Forestière</span><span>600 DA</span></li>
+                <li><span>À la Véronaise</span><span>700 DA</span></li>
+                <li><span>Roquefort</span><span>800 DA</span></li>
+                <li><span>Robert</span><span>700 DA</span></li>
+              </ul>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-head"><h3>Suprême de poulet</h3><span class="price">1200 DA</span></div>
+              <p class="sauce-label">Les sauces</p>
+              <ul class="sauce-list">
+                <li><span>Crème champignons</span><span>500 DA</span></li>
+                <li><span>Aux herbes et citron</span><span>500 DA</span></li>
+                <li><span>Grand-mère</span><span>700 DA</span></li>
+                <li><span>Bourguignon</span><span>700 DA</span></li>
+              </ul>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-head"><h3>Rumsteak</h3><span class="price">2250 DA</span></div>
+              <p class="sauce-label">Les sauces</p>
+              <ul class="sauce-list">
+                <li><span>Chasseur</span><span>500 DA</span></li>
+                <li><span>Moutarde</span><span>500 DA</span></li>
+                <li><span>À la japonaise</span><span>600 DA</span></li>
+              </ul>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-head"><h3>Foie</h3><span class="price">2400 DA</span></div>
+              <p class="sauce-label">Les sauces</p>
+              <ul class="sauce-list">
+                <li><span>Crème à l'ail</span><span>600 DA</span></li>
+                <li><span>Sauté à l'ail</span><span>500 DA</span></li>
+                <li><span>Sauce rouge</span><span>500 DA</span></li>
+              </ul>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-head"><h3>Filet</h3><span class="price">2400 DA</span></div>
+              <p class="sauce-label">Les sauces</p>
+              <ul class="sauce-list">
+                <li><span>Au poivre</span><span>500 DA</span></li>
+                <li><span>Mignon aux champignons</span><span>600 DA</span></li>
+                <li><span>Flambé au cognac</span><span>900 DA</span></li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div class="menu-panel" data-panel="plats">
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Méchoui de chevreau</h3><span class="price">2900 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Osso buco (jarret de veau)</h3><span class="price">2500 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Rôti de veau</h3><span class="price">2500 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Kebda Mcharmla</h3><span class="price">2500 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Tendron</h3><span class="price">2600 DA</span></div>
-          </div>
-        </div>
-
-        <div class="menu-panel" data-panel="desserts">
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Fondant au chocolat</h3><span class="price">600 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Fondant pistache</h3><span class="price">600 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Crème caramel</h3><span class="price">600 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Crêpe tropézienne</h3><span class="price">700 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Assiette de fruits</h3><span class="price">1400 DA</span></div>
-          </div>
-          <div class="menu-item reveal">
-            <div class="menu-item-head"><h3>Assiette de fromages</h3><span class="price">1200 DA</span></div>
+        <div class="dossier-item" data-panel="poissons">
+          <button class="dossier-head" aria-expanded="false">
+            <span class="dossier-num">06</span><span class="dossier-title">Poissons <small>selon arrivage</small></span><span class="dossier-chevron"></span>
+          </button>
+          <div class="dossier-body">
+            <div class="menu-item">
+              <p class="sauce-label">Les sauces</p>
+              <ul class="sauce-list">
+                <li><span>Chimichurri</span><span>700 DA</span></li>
+                <li><span>Thaï</span><span>600 DA</span></li>
+                <li><span>Dieppoise</span><span>700 DA</span></li>
+                <li><span>Pesto</span><span>700 DA</span></li>
+                <li><span>Meunière</span><span>500 DA</span></li>
+              </ul>
+            </div>
           </div>
         </div>
 
+        <div class="dossier-item" data-panel="plats">
+          <button class="dossier-head" aria-expanded="false">
+            <span class="dossier-num">07</span><span class="dossier-title">Nos plats</span><span class="dossier-chevron"></span>
+          </button>
+          <div class="dossier-body">
+            <div class="menu-item"><div class="menu-item-head"><h3>Méchoui de chevreau</h3><span class="price">2900 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Osso buco (jarret de veau)</h3><span class="price">2500 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Rôti de veau</h3><span class="price">2500 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Kebda Mcharmla</h3><span class="price">2500 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Tendron</h3><span class="price">2600 DA</span></div></div>
+          </div>
         </div>
+
+        <div class="dossier-item" data-panel="desserts">
+          <button class="dossier-head" aria-expanded="false">
+            <span class="dossier-num">08</span><span class="dossier-title">Desserts</span><span class="dossier-chevron"></span>
+          </button>
+          <div class="dossier-body">
+            <div class="menu-item"><div class="menu-item-head"><h3>Fondant au chocolat</h3><span class="price">600 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Fondant pistache</h3><span class="price">600 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Crème caramel</h3><span class="price">600 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Crêpe tropézienne</h3><span class="price">700 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Assiette de fruits</h3><span class="price">1400 DA</span></div></div>
+            <div class="menu-item"><div class="menu-item-head"><h3>Assiette de fromages</h3><span class="price">1200 DA</span></div></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- GALERIE -->
-  <section class="section gallery-section" id="galerie">
+  <section class="section paper" id="galerie">
     <div class="container">
-      <div class="ornament-rule center"><span></span></div>
-      <p class="eyebrow reveal center">Instagram &amp; ambiance</p>
-      <h2 class="reveal center">Galerie</h2>
-      <p class="section-note reveal center">Emplacements réservés — à remplacer par les photos du restaurant.</p>
-      <div class="gallery-grid">
-        <div class="ph-tile reveal"><i class="fa-solid fa-utensils"></i><span>Salle du restaurant</span></div>
-        <div class="ph-tile reveal"><i class="fa-solid fa-champagne-glasses"></i><span>Terrasse</span></div>
-        <div class="ph-tile reveal"><i class="fa-solid fa-star"></i><span>Spécialités maison</span></div>
-        <div class="ph-tile reveal"><i class="fa-solid fa-plate-wheat"></i><span>Plat signature</span></div>
-        <div class="ph-tile reveal"><i class="fa-solid fa-champagne-glasses"></i><span>Ambiance soirée</span></div>
-        <div class="ph-tile reveal"><i class="fa-solid fa-crown"></i><span>Notre équipe</span></div>
+      <p class="kicker center">Instagram</p>
+      <h2 class="center">Galerie</h2>
+      <p class="section-note center">Emplacements réservés — à remplacer par les photos du restaurant.</p>
+      <div class="photo-wall">
+        <div class="polaroid reveal rot-a"><span class="pin"></span><div class="polaroid-frame"><i class="fa-solid fa-utensils"></i></div><span class="polaroid-cap">Salle du restaurant</span></div>
+        <div class="polaroid reveal rot-b"><span class="pin"></span><div class="polaroid-frame"><i class="fa-solid fa-champagne-glasses"></i></div><span class="polaroid-cap">Terrasse</span></div>
+        <div class="polaroid reveal rot-c"><span class="pin"></span><div class="polaroid-frame"><i class="fa-solid fa-star"></i></div><span class="polaroid-cap">Spécialités maison</span></div>
+        <div class="polaroid reveal rot-b"><span class="pin"></span><div class="polaroid-frame"><i class="fa-solid fa-plate-wheat"></i></div><span class="polaroid-cap">Plat signature</span></div>
+        <div class="polaroid reveal rot-a"><span class="pin"></span><div class="polaroid-frame"><i class="fa-solid fa-champagne-glasses"></i></div><span class="polaroid-cap">Ambiance soirée</span></div>
+        <div class="polaroid reveal rot-c"><span class="pin"></span><div class="polaroid-frame"><i class="fa-solid fa-crown"></i></div><span class="polaroid-cap">Notre équipe</span></div>
       </div>
-      <a href="https://www.instagram.com/ambassade.restaurant/" target="_blank" rel="noopener" class="btn btn-outline reveal center-btn">
-        <i class="fa-brands fa-instagram"></i> Voir plus sur Instagram
+      <a href="https://www.instagram.com/ambassade.restaurant/" target="_blank" rel="noopener" class="stamp-btn stamp-btn-outline-ink center-btn">
+        Voir plus sur Instagram
       </a>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="section contact-section" id="contact">
-    <div class="container contact-grid">
-      <div class="contact-info reveal">
-        <div class="ornament-rule"><span></span></div>
-        <p class="eyebrow">Nous trouver</p>
+  <section class="section ink" id="contact">
+    <div class="container contact-wrap">
+      <div class="fiche reveal">
+        <p class="kicker">Nous trouver</p>
         <h2>Réservez votre table</h2>
         <ul class="info-list">
           <li><i class="fa-solid fa-location-dot"></i> Tizi Ouzou, Algérie — adresse exacte à confirmer</li>
@@ -368,12 +302,12 @@
           <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/213XXXXXXXXX">+213 XX XX XX XX</a></li>
           <li><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/ambassade.restaurant/" target="_blank" rel="noopener">@ambassade.restaurant</a></li>
         </ul>
-        <div class="contact-cta">
-          <a href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table" target="_blank" rel="noopener" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Réserver sur WhatsApp</a>
-          <a href="#" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-solid fa-diamond-turn-right"></i> Itinéraire</a>
+        <div class="fiche-actions">
+          <a href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table" target="_blank" rel="noopener" class="stamp-btn">Réserver sur WhatsApp</a>
+          <a href="#" target="_blank" rel="noopener" class="stamp-btn stamp-btn-outline">Itinéraire</a>
         </div>
       </div>
-      <div class="contact-map reveal">
+      <div class="map-frame reveal">
         <iframe
           src="https://www.google.com/maps?q=Tizi%20Ouzou%2C%20Alg%C3%A9rie&output=embed"
           width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localisation L'Ambassade"></iframe>
@@ -383,19 +317,16 @@
 
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <img src="assets/img/logo-crest.png" alt="L'Ambassade" class="footer-crest">
-      <p>Restaurant — Tizi Ouzou</p>
-    </div>
-    <div class="footer-social">
-      <a href="https://www.instagram.com/ambassade.restaurant/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.facebook.com/lambassaderesto/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-      <a href="https://wa.me/213XXXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
-    <p class="footer-copy">&copy; <span id="year"></span> L'Ambassade. Tous droits réservés.</p>
+<footer class="footer">
+  <img src="assets/img/logo-badge.png" alt="L'Ambassade" class="footer-seal">
+  <p class="footer-name">L'Ambassade</p>
+  <p class="footer-sub">Restaurant à Tizi Ouzou — depuis 1988</p>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/ambassade.restaurant/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.facebook.com/lambassaderesto/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+    <a href="https://wa.me/213XXXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
   </div>
+  <p class="footer-copy">&copy; <span id="year"></span> L'Ambassade. Tous droits réservés.</p>
 </footer>
 
 <a href="https://wa.me/213XXXXXXXXX" target="_blank" rel="noopener" class="float-whatsapp" aria-label="Commander sur WhatsApp">

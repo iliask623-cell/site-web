@@ -1,52 +1,31 @@
-// ===== Hero fireflies =====
-const firefliesEl = document.getElementById('fireflies');
-if (firefliesEl) {
-  const count = window.innerWidth < 700 ? 16 : 30;
-  for (let i = 0; i < count; i++) {
-    const firefly = document.createElement('span');
-    firefly.className = 'firefly';
-    firefly.style.left = Math.random() * 100 + '%';
-    firefly.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
-    firefly.style.animationDuration = (6 + Math.random() * 8) + 's';
-    firefly.style.animationDelay = (Math.random() * 10) + 's';
-    firefly.style.opacity = String(0.3 + Math.random() * 0.5);
-    firefliesEl.appendChild(firefly);
-  }
-}
-
 // ===== Loader =====
 window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
   setTimeout(() => loader.classList.add('hide'), 500);
 });
 
-// ===== Header scroll state =====
-const header = document.getElementById('siteHeader');
-const onScroll = () => {
-  header.classList.toggle('scrolled', window.scrollY > 40);
-};
-document.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
-
-// ===== Mobile nav =====
-const burger = document.getElementById('burger');
-const mainNav = document.getElementById('mainNav');
-burger.addEventListener('click', () => {
-  mainNav.classList.toggle('open');
-  burger.classList.toggle('active');
+// ===== Mobile index overlay =====
+const indexToggle = document.getElementById('indexToggle');
+const indexOverlay = document.getElementById('indexOverlay');
+indexToggle.addEventListener('click', () => {
+  const open = indexOverlay.classList.toggle('open');
+  indexToggle.setAttribute('aria-expanded', String(open));
 });
-mainNav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => mainNav.classList.remove('open'));
+indexOverlay.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    indexOverlay.classList.remove('open');
+    indexToggle.setAttribute('aria-expanded', 'false');
+  });
 });
 
-// ===== Active nav link on scroll =====
+// ===== Active rail link on scroll =====
 const sections = document.querySelectorAll('main section[id]');
-const navLinks = document.querySelectorAll('.nav-link');
+const railLinks = document.querySelectorAll('.rail-link');
 const navObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+      railLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.rail-link[href="#${entry.target.id}"]`);
       if (active) active.classList.add('active');
     }
   });
@@ -65,42 +44,41 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 revealEls.forEach(el => revealObserver.observe(el));
 
-// ===== Menu tabs =====
-const tabBtns = document.querySelectorAll('.tab-btn');
-const panels = document.querySelectorAll('.menu-panel');
-tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tabBtns.forEach(b => b.classList.remove('active'));
-    panels.forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelector(`.menu-panel[data-panel="${btn.dataset.tab}"]`).classList.add('active');
+// ===== Menu dossier accordion =====
+const dossierItems = document.querySelectorAll('.dossier-item');
+function setDossierHeight(item, open) {
+  const body = item.querySelector('.dossier-body');
+  const head = item.querySelector('.dossier-head');
+  if (open) {
+    item.classList.add('open');
+    head.setAttribute('aria-expanded', 'true');
+    body.style.maxHeight = body.scrollHeight + 40 + 'px';
+  } else {
+    item.classList.remove('open');
+    head.setAttribute('aria-expanded', 'false');
+    body.style.maxHeight = '0px';
+  }
+}
+dossierItems.forEach((item, i) => {
+  item.querySelector('.dossier-head').addEventListener('click', () => {
+    const willOpen = !item.classList.contains('open');
+    dossierItems.forEach(other => setDossierHeight(other, false));
+    if (willOpen) setDossierHeight(item, true);
+  });
+  if (i === 0) setDossierHeight(item, true);
+});
+window.addEventListener('resize', () => {
+  dossierItems.forEach(item => {
+    if (item.classList.contains('open')) setDossierHeight(item, true);
   });
 });
 
 // ===== Footer year =====
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// ===== PWA: service worker + install prompt =====
+// ===== PWA: service worker =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   });
 }
-
-let deferredInstallPrompt = null;
-const installChip = document.getElementById('installChip');
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredInstallPrompt = e;
-  installChip.hidden = false;
-});
-installChip.addEventListener('click', async () => {
-  if (!deferredInstallPrompt) return;
-  deferredInstallPrompt.prompt();
-  await deferredInstallPrompt.userChoice;
-  deferredInstallPrompt = null;
-  installChip.hidden = true;
-});
-window.addEventListener('appinstalled', () => {
-  installChip.hidden = true;
-});
