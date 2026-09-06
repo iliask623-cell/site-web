@@ -73,6 +73,46 @@ window.addEventListener('resize', () => {
   });
 });
 
+// ===== Seal stamp effect =====
+const stampEls = document.querySelectorAll('.seal-stamp');
+const stampObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('stamped');
+      stampObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.4 });
+stampEls.forEach(el => stampObserver.observe(el));
+
+// ===== Animated stat counters =====
+function animateCount(el) {
+  const to = parseFloat(el.dataset.countTo);
+  const from = parseFloat(el.dataset.countFrom || '0');
+  const decimals = parseInt(el.dataset.decimals || '0', 10);
+  const duration = 1400;
+  const start = performance.now();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const value = from + (to - from) * eased;
+    el.textContent = decimals ? value.toFixed(decimals) : Math.round(value);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = decimals ? to.toFixed(decimals) : to;
+  }
+  requestAnimationFrame(step);
+}
+const countEls = document.querySelectorAll('[data-count-to]');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCount(entry.target);
+      countObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+countEls.forEach(el => countObserver.observe(el));
+
 // ===== Footer year =====
 document.getElementById('year').textContent = new Date().getFullYear();
 
