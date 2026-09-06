@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dinasty Bakery | New York Style Bakery — Tizi Ouzou</title>
+<meta name="description" content="Dinasty Bakery, New York style bakery à Tizi Ouzou. Cookies gourmands XXL, pâtisserie fine, viennoiserie & brunch. Ouvert 7j/7 de 7h à minuit.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Dinasty">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="reveal-loader" id="loader"><span>DINASTY</span></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#accueil" class="logo">
+      <span class="logo-mark"><i class="fa-solid fa-crown"></i></span>
+      <span class="logo-text">Dinasty<small>Bakery</small></span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#accueil" class="nav-link active">Accueil</a>
+      <a href="#univers" class="nav-link">L'Univers</a>
+      <a href="#creations" class="nav-link">Notre Carte</a>
+      <a href="#galerie" class="nav-link">Galerie</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://wa.me/213556159651?text=Bonjour%20Dinasty%2C%20je%20voudrais%20passer%20une%20commande" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> <span>Commander</span>
+      </a>
+      <button class="install-chip" id="installChip" hidden>
+        <i class="fa-solid fa-mobile-screen-button"></i> <span>Installer</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="accueil">
+    <div class="hero-media">
+      <div class="hero-sparkles" id="sparkles"></div>
+      <div class="hero-blob blob-a"></div>
+      <div class="hero-blob blob-b"></div>
+    </div>
+    <div class="container hero-content">
+      <p class="eyebrow reveal">New York Style Bakery — Tizi Ouzou</p>
+      <h1 class="reveal">Chaque douceur raconte<br>une <em>dynastie</em> de saveurs</h1>
+      <p class="hero-sub reveal">Cookies gourmands XXL, viennoiseries fraîches et pâtisserie fine, préparés avec passion au cœur de Tizi Ouzou. Ouvert 7j/7 de 7h à minuit.</p>
+      <div class="hero-cta reveal">
+        <a href="#creations" class="btn btn-primary">Notre carte <i class="fa-solid fa-arrow-down"></i></a>
+        <a href="https://wa.me/213556159651" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-brands fa-whatsapp"></i> Commander</a>
+      </div>
+    </div>
+    <div class="hero-seal" aria-hidden="true">
+      <svg viewBox="0 0 200 200" class="seal-svg">
+        <defs>
+          <path id="sealCircle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"></path>
+        </defs>
+        <circle cx="100" cy="100" r="94" class="seal-ring"></circle>
+        <text class="seal-text">
+          <textPath href="#sealCircle" startOffset="0%">✦ FAIT MAISON ✦ TIZI OUZOU ✦ DEPUIS TOUJOURS </textPath>
+        </text>
+        <g class="seal-crown" transform="translate(100,100)">
+          <path d="M-22,10 L-22,-4 L-11,6 L0,-14 L11,6 L22,-4 L22,10 Z" fill="currentColor"></path>
+        </g>
+      </svg>
+    </div>
+    <a href="#univers" class="scroll-cue" aria-label="Défiler"><span></span></a>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Viennoiserie fraîche</span><i class="fa-solid fa-star"></i>
+      <span>Pâtisserie fine</span><i class="fa-solid fa-star"></i>
+      <span>Gâteaux sur mesure</span><i class="fa-solid fa-star"></i>
+      <span>Pièces montées</span><i class="fa-solid fa-star"></i>
+      <span>Brunch gourmand</span><i class="fa-solid fa-star"></i>
+      <span>Fait maison</span><i class="fa-solid fa-star"></i>
+      <span>Viennoiserie fraîche</span><i class="fa-solid fa-star"></i>
+      <span>Pâtisserie fine</span><i class="fa-solid fa-star"></i>
+      <span>Gâteaux sur mesure</span><i class="fa-solid fa-star"></i>
+      <span>Pièces montées</span><i class="fa-solid fa-star"></i>
+      <span>Brunch gourmand</span><i class="fa-solid fa-star"></i>
+      <span>Fait maison</span><i class="fa-solid fa-star"></i>
+    </div>
+  </div>
+
+  <!-- UNIVERS -->
+  <section class="section univers" id="univers">
+    <div class="container univers-grid">
+      <div class="univers-images">
+        <!-- TODO: remplacer ces cartes par de vraies photos (atelier / vitrine) dès réception -->
+        <div class="ph-card img-a reveal"><i class="fa-solid fa-kitchen-set"></i><span>Notre atelier pâtissier</span></div>
+        <div class="ph-card img-b reveal"><i class="fa-solid fa-store"></i><span>Vitrine gourmande</span></div>
+      </div>
+      <div class="univers-text">
+        <p class="eyebrow reveal">Notre univers</p>
+        <h2 class="reveal">L'art pâtissier,<br>transmis avec passion</h2>
+        <p class="reveal">Chez Dinasty, chaque création est pensée comme une pièce d'orfèvrerie sucrée : viennoiseries pur beurre, pâtisserie fine et gâteaux personnalisés pour vos plus belles occasions — fiançailles, anniversaires, moments en famille. Une adresse gourmande au cœur de Tizi Ouzou, ouverte du matin jusqu'à minuit.</p>
+        <div class="univers-stats reveal">
+          <div class="stat"><span class="stat-num">7h–00h</span><span class="stat-label">Amplitude horaire</span></div>
+          <div class="stat"><span class="stat-num">7j/7</span><span class="stat-label">Ouvert toute la semaine</span></div>
+          <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Fait maison</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARTE / MENU -->
+  <section class="section menu-section" id="creations">
+    <div class="container">
+      <p class="eyebrow reveal center">Notre savoir-faire</p>
+      <h2 class="reveal center">Notre Carte</h2>
+      <p class="section-note reveal center">Nos cookies gourmands façon New York — les autres catégories arrivent bientôt sur cette carte.</p>
+
+      <div class="menu-tabs reveal" role="tablist">
+        <button class="tab-btn active" data-tab="cookies">Cookies</button>
+        <button class="tab-btn" data-tab="patisserie">Pâtisserie</button>
+        <button class="tab-btn" data-tab="viennoiserie">Viennoiserie</button>
+        <button class="tab-btn" data-tab="brunch">Brunch</button>
+      </div>
+
+      <div class="menu-panels">
+
+        <div class="menu-panel active" data-panel="cookies">
+          <div class="cookie-grid">
+            <div class="cookie-card reveal"><h3>Rafaello</h3><span class="price">160 DA</span></div>
+            <div class="cookie-card reveal"><h3>Triple</h3><p>Chocolat</p><span class="price">180 DA</span></div>
+            <div class="cookie-card reveal"><h3>Oreo</h3><p>Cheese cake</p><span class="price">260 DA</span></div>
+            <div class="cookie-card reveal"><h3>Gourmand</h3><p>Caramel</p><span class="price">190 DA</span></div>
+            <div class="cookie-card reveal"><h3>Bueno</h3><span class="price">280 DA</span></div>
+            <div class="cookie-card reveal"><h3>Pistache</h3><span class="price">350 DA</span></div>
+            <div class="cookie-card reveal"><h3>Ferrero</h3><span class="price">240 DA</span></div>
+            <div class="cookie-card reveal"><h3>Framboise</h3><span class="price">270 DA</span></div>
+            <div class="cookie-card reveal"><h3>Snickers</h3><span class="price">280 DA</span></div>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="patisserie">
+          <div class="menu-soon reveal">
+            <i class="fa-solid fa-cake-candles"></i>
+            <p>Notre sélection de pâtisserie fine arrive bientôt sur cette carte. Contactez-nous sur WhatsApp pour connaître les créations disponibles.</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="viennoiserie">
+          <div class="menu-soon reveal">
+            <i class="fa-solid fa-croissant"></i>
+            <p>Viennoiseries fraîches préparées chaque matin — carte détaillée à venir. Écrivez-nous sur WhatsApp pour le disponible du jour.</p>
+          </div>
+        </div>
+
+        <div class="menu-panel" data-panel="brunch">
+          <div class="menu-soon reveal">
+            <i class="fa-solid fa-mug-saucer"></i>
+            <p>Nos formules brunch seront bientôt détaillées ici. Contactez-nous sur WhatsApp pour réserver votre table.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <a href="https://wa.me/213556159651?text=Bonjour%20Dinasty%2C%20je%20voudrais%20voir%20la%20carte%20compl%C3%A8te" target="_blank" rel="noopener" class="btn btn-primary reveal center-btn">
+        <i class="fa-brands fa-whatsapp"></i> Demander la carte complète
+      </a>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="section gallery-section" id="galerie">
+    <div class="container">
+      <p class="eyebrow reveal center">Instagram &amp; ambiance</p>
+      <h2 class="reveal center">Galerie</h2>
+      <p class="section-note reveal center">Photos à venir — cet espace accueillera bientôt nos plus belles créations.</p>
+      <div class="gallery-grid">
+        <div class="ph-tile reveal"><i class="fa-solid fa-croissant"></i><span>Viennoiserie du matin</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-cake-candles"></i><span>Pâtisserie fine</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-cookie"></i><span>Fondants &amp; trompe-l'œil</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-champagne-glasses"></i><span>Pièces montées</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-mug-saucer"></i><span>Brunch gourmand</span></div>
+        <div class="ph-tile reveal"><i class="fa-solid fa-store"></i><span>L'atelier Dinasty</span></div>
+      </div>
+      <a href="https://www.instagram.com/dinasty.dz/" target="_blank" rel="noopener" class="btn btn-outline reveal center-btn">
+        <i class="fa-brands fa-instagram"></i> Voir plus sur Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- COMMUNAUTE / SOCIAL -->
+  <section class="section community-section">
+    <div class="container community-inner reveal">
+      <p class="eyebrow center">Rejoignez la communauté</p>
+      <h2 class="center">Suivez Dinasty</h2>
+      <div class="community-links">
+        <a href="https://www.instagram.com/dinasty.dz/" target="_blank" rel="noopener" class="community-link">
+          <i class="fa-brands fa-instagram"></i> <span>@dinasty.dz</span>
+        </a>
+        <a href="https://www.tiktok.com/@dinasty.dz" target="_blank" rel="noopener" class="community-link">
+          <i class="fa-brands fa-tiktok"></i> <span>@dinasty.dz</span>
+        </a>
+        <a href="#" target="_blank" rel="noopener" class="community-link">
+          <i class="fa-brands fa-facebook"></i> <span>Dinasty dz</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-section" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info reveal">
+        <p class="eyebrow">Nous trouver</p>
+        <h2>Une envie de douceur ?</h2>
+        <ul class="info-list">
+          <li><i class="fa-solid fa-location-dot"></i> 16 rue Kerrad Rachid (vers le campus), Tizi Ouzou, Algérie</li>
+          <li><i class="fa-solid fa-clock"></i> Ouvert tous les jours de 7h à minuit</li>
+          <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/213556159651">+213 556 15 96 51</a></li>
+          <li><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/dinasty.dz/" target="_blank" rel="noopener">@dinasty.dz</a></li>
+        </ul>
+        <div class="contact-cta">
+          <a href="https://wa.me/213556159651?text=Bonjour%20Dinasty%2C%20je%20voudrais%20passer%20une%20commande" target="_blank" rel="noopener" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Commander sur WhatsApp</a>
+          <a href="https://www.google.com/maps?q=16+rue+Kerrad+Rachid%2C+Tizi+Ouzou%2C+Alg%C3%A9rie" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-solid fa-diamond-turn-right"></i> Itinéraire</a>
+        </div>
+      </div>
+      <div class="contact-map reveal">
+        <iframe
+          src="https://www.google.com/maps?q=16%20rue%20Kerrad%20Rachid%2C%20Tizi%20Ouzou%2C%20Alg%C3%A9rie&output=embed"
+          width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localisation Dinasty"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text"><i class="fa-solid fa-crown"></i> Dinasty Bakery</span>
+      <p>New York Style Bakery — Tizi Ouzou</p>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/dinasty.dz/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@dinasty.dz" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://wa.me/213556159651" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <p class="footer-copy">&copy; <span id="year"></span> Dinasty. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/213556159651" target="_blank" rel="noopener" class="float-whatsapp" aria-label="Commander sur WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script src="js/script.js"></script>
+</body>
+</html>
