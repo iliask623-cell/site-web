@@ -227,16 +227,16 @@ em{ font-style: italic; color: var(--gold); }
 .menu-panel{ display:none; }
 .menu-panel.active{ display:block; }
 
-.cookie-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-.cookie-card{
+.treat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.treat-card{
   background:linear-gradient(150deg, #1c1a17, #0f0e0d 70%); border:1px solid rgba(205,164,94,.25);
   border-radius:14px; padding:26px 20px; text-align:center;
   transition: transform .4s var(--ease), border-color .4s var(--ease);
 }
-.cookie-card:hover{ transform:translateY(-6px); border-color:var(--gold); }
-.cookie-card h3{ font-family:var(--font-serif); font-size:1.15rem; color:var(--cream); margin-bottom:4px; }
-.cookie-card p{ color:var(--cream-dim); font-size:.82rem; margin-bottom:10px; }
-.cookie-card .price{ display:inline-block; font-family:var(--font-serif); color:var(--gold); font-size:1.05rem; margin-top:6px; }
+.treat-card:hover{ transform:translateY(-6px); border-color:var(--gold); }
+.treat-card h3{ font-family:var(--font-serif); font-size:1.15rem; color:var(--cream); margin-bottom:4px; }
+.treat-card p{ color:var(--cream-dim); font-size:.82rem; margin-bottom:10px; }
+.treat-card .price{ display:inline-block; font-family:var(--font-serif); color:var(--gold); font-size:1.05rem; margin-top:6px; }
 
 .menu-soon{ text-align:center; padding:40px 20px; color:var(--cream-dim); }
 .menu-soon i{ font-size:2.2rem; color:var(--gold); margin-bottom:16px; display:block; }
@@ -318,14 +318,14 @@ em{ font-style: italic; color: var(--gold); }
   .univers-grid, .contact-grid{ grid-template-columns:1fr; }
   .univers-images{ height:360px; margin-bottom:20px; }
   .gallery-grid{ grid-template-columns:repeat(2,1fr); }
-  .cookie-grid{ grid-template-columns:repeat(2,1fr); }
+  .treat-grid{ grid-template-columns:repeat(2,1fr); }
   .hero-seal{ width:100px; height:100px; bottom:20px; right:20px; }
 }
 @media (max-width: 560px){
   .section{ padding:80px 0; }
   .gallery-grid{ grid-template-columns:1fr 1fr; }
   .ph-tile{ height:190px; }
-  .cookie-grid{ grid-template-columns:1fr 1fr; }
+  .treat-grid{ grid-template-columns:1fr 1fr; }
   .hero-cta{ flex-direction:column; align-items:flex-start; }
   .hero-seal{ display:none; }
 }
