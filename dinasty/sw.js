@@ -6,7 +6,10 @@ const CORE_ASSETS = [
   './js/script.js',
   './manifest.json',
   './assets/icons/icon-192.png',
-  './assets/icons/icon-512.png'
+  './assets/icons/icon-512.png',
+  './assets/img/logo.png',
+  './assets/img/boutique-facade.jpg',
+  './assets/img/atelier-vitrine.jpg'
 ];
 
 self.addEventListener('install', (event) => {

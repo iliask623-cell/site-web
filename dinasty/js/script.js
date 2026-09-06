@@ -1,20 +1,44 @@
-// ===== Hero sparkles =====
-const sparklesEl = document.getElementById('sparkles');
-if (sparklesEl) {
-  const count = window.innerWidth < 700 ? 14 : 26;
+// ===== Hero crumbs =====
+const crumbsEl = document.getElementById('crumbs');
+if (crumbsEl) {
+  const count = window.innerWidth < 700 ? 10 : 20;
   for (let i = 0; i < count; i++) {
-    const sparkle = document.createElement('span');
-    sparkle.className = 'sparkle';
+    const crumb = document.createElement('span');
+    crumb.className = 'crumb';
     const size = 3 + Math.random() * 4;
-    sparkle.style.width = size + 'px';
-    sparkle.style.height = size + 'px';
-    sparkle.style.left = Math.random() * 100 + '%';
-    sparkle.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
-    sparkle.style.animationDuration = (7 + Math.random() * 9) + 's';
-    sparkle.style.animationDelay = (Math.random() * 10) + 's';
-    sparkle.style.opacity = String(0.3 + Math.random() * 0.5);
-    sparklesEl.appendChild(sparkle);
+    crumb.style.width = size + 'px';
+    crumb.style.height = size + 'px';
+    crumb.style.left = Math.random() * 100 + '%';
+    crumb.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
+    crumb.style.animationDuration = (7 + Math.random() * 9) + 's';
+    crumb.style.animationDelay = (Math.random() * 10) + 's';
+    crumb.style.opacity = String(0.25 + Math.random() * 0.45);
+    crumbsEl.appendChild(crumb);
   }
+}
+
+// ===== Photo marquee (façon story highlights) =====
+const marqueeTrack = document.getElementById('marqueeTrack');
+if (marqueeTrack) {
+  const items = [
+    ['assets/img/cookie-rafaello.jpg', 'Rafaello'],
+    ['assets/img/cheesecake-oreo.jpg', 'Oreo'],
+    ['assets/img/cookie-pistache.jpg', 'Pistache'],
+    ['assets/img/cheesecake-framboise.jpg', 'Framboise'],
+    ['assets/img/cookie-bueno.jpg', 'Bueno'],
+    ['assets/img/cheesecake-caramelnoix.jpg', 'Caramel & Noix'],
+    ['assets/img/cookie-ferrero.jpg', 'Ferrero'],
+    ['assets/img/cheesecake-bueno.jpg', 'Bueno'],
+    ['assets/img/cookie-snickers.jpg', 'Snickers'],
+    ['assets/img/cheesecake-ferrero.jpg', 'Ferrero'],
+  ];
+  const renderItems = (list) => list.map(([src, label]) => `
+    <div class="marquee-item">
+      <span class="ring"><img src="${src}" alt="${label}" loading="lazy"></span>
+      <span>${label}</span>
+    </div>
+  `).join('');
+  marqueeTrack.innerHTML = renderItems(items) + renderItems(items);
 }
 
 // ===== Loader =====
