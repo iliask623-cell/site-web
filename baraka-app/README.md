@@ -21,13 +21,21 @@ partiellement hors-ligne, et se met à jour automatiquement.
 - Gérer ses réservations (voir le code, annuler)
 
 **Côté commerçant**
-- Créer son commerce (nom, catégorie, wilaya/commune, adresse, WhatsApp)
+- Créer son commerce (nom, catégorie, wilaya/commune, adresse, position exacte sur une carte, WhatsApp)
 - Publier des paniers surprise (prix, quantité, créneau de retrait, option "panier f'tour")
+- Mettre un panier en pause / le réactiver, ou le supprimer
 - Voir les réservations à honorer et les marquer comme récupérées / non présentées
+
+**Panel administrateur** (`/admin`, rôle `admin`)
+- Liste de tous les commerces, avec bloquer/débloquer (un commerce bloqué disparaît
+  immédiatement de l'exploration côté client)
+- Vue de toutes les réservations de la plateforme
 
 **Transverse**
 - 🇫🇷 Français / 🇩🇿 Arabe (avec mise en page RTL) / 🇬🇧 Anglais
 - Devise DZD native (DA / دج)
+- Carte interactive (Leaflet/OpenStreetMap, gratuite, sans clé API) : vue liste/carte
+  des paniers, filtre "près de moi" par géolocalisation avec distance en km
 - Installable comme une app (PWA), icônes et manifeste inclus
 
 ## Stack technique
@@ -54,6 +62,9 @@ npm run dev
 Ouvre <http://localhost:5173>. Un bandeau "Application de démonstration" s'affiche
 tant qu'aucun backend réel n'est connecté.
 
+En mode démo, un compte administrateur est préconfiguré pour tester le panel
+`/admin` : `admin@baraka.dz` / `admin123`.
+
 ## Passer en production avec un vrai backend (Supabase)
 
 1. Crée un projet gratuit sur [app.supabase.com](https://app.supabase.com).
@@ -69,6 +80,11 @@ tant qu'aucun backend réel n'est connecté.
    `VITE_SUPABASE_ANON_KEY` (trouvables dans **Project Settings > API**).
 5. Relance `npm run dev` — l'app bascule automatiquement sur Supabase, le bandeau
    "démo" disparaît.
+6. Pour te donner accès au panel admin (`/admin`) : crée d'abord un compte normal
+   depuis l'app, puis dans **Table editor > profiles** (ou en SQL), passe son `role`
+   à `admin`. Ce rôle n'est jamais attribuable depuis le formulaire d'inscription —
+   la base de données le refuse (voir `supabase/schema.sql`), il faut le faire à la
+   main pour chaque nouvel administrateur.
 
 ## Build & déploiement
 
@@ -90,6 +106,7 @@ src/
   lib/            Types, client Supabase, données mock, wilayas, devise
   pages/          Pages de l'app (Landing, Explore, BasketDetail...)
   pages/merchant/ Tableau de bord commerçant
+  pages/admin/    Panel administrateur
 supabase/
   schema.sql      Schéma Postgres + RLS + triggers
 ```
@@ -105,5 +122,7 @@ supabase/
 - **Notifications push** (nouveaux paniers près de chez toi, rappel de retrait)
 - **Mode Ramadan automatique** : mise en avant programmée des paniers f'tour selon
   le calendrier hégirien
-- **Espace administrateur** pour valider les commerçants et modérer les annonces
-- **Avis et notation** des commerces pour renforcer la confiance
+- **Signalement de commerce** par les clients, qui alimenterait une file de
+  modération dans le panel admin (pas construit tant que rien ne peut le déclencher)
+- **Avis et notation** des commerces pour renforcer la confiance (avis réels
+  uniquement, jamais générés)

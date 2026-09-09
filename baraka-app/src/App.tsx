@@ -7,6 +7,7 @@ import Explore from './pages/Explore'
 import BasketDetail from './pages/BasketDetail'
 import MyReservations from './pages/MyReservations'
 import MerchantDashboard from './pages/merchant/MerchantDashboard'
+import AdminDashboard from './pages/admin/AdminDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import { AuthProvider } from './context/AuthContext'
 
@@ -38,6 +39,14 @@ export default function App() {
               element={
                 <ProtectedRoute role="merchant">
                   <MerchantDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="admin"
+              element={
+                <ProtectedRoute role="admin">
+                  <AdminDashboard />
                 </ProtectedRoute>
               }
             />

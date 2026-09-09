@@ -34,6 +34,11 @@ export default function Header() {
               {t('nav.merchant')}
             </NavLink>
           )}
+          {profile?.role === 'admin' && (
+            <NavLink to="/admin" className={linkClass}>
+              {t('nav.admin')}
+            </NavLink>
+          )}
         </nav>
 
         <div className="flex items-center gap-3">

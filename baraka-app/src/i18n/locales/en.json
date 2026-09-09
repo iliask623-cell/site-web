@@ -7,6 +7,7 @@
     "explore": "Explore",
     "reservations": "My reservations",
     "merchant": "Merchant space",
+    "admin": "Admin",
     "login": "Log in",
     "logout": "Log out",
     "account": "My account"
@@ -58,6 +59,8 @@
     "filter_wilaya": "Filter by wilaya",
     "view_list": "List",
     "view_map": "Map",
+    "near_me": "Near me",
+    "location_error": "Location unavailable — allow access to your position or use the wilaya filter.",
     "all_wilayas": "All wilayas",
     "search_placeholder": "Search a shop, a dish…",
     "empty": "No baskets available for this filter right now.",
@@ -116,6 +119,9 @@
     "edit": "Edit",
     "delete": "Delete",
     "delete_confirm": "Delete this basket?",
+    "pause": "Pause",
+    "resume": "Resume",
+    "paused": "Paused",
     "no_baskets": "You haven't published any basket yet.",
     "incoming_reservations": "Reservations to honor",
     "no_reservations": "No reservations yet.",
@@ -129,6 +135,20 @@
       "hotel": "Hotel / Catering",
       "other": "Other"
     }
+  },
+  "admin": {
+    "dashboard_title": "Admin panel",
+    "businesses": "Businesses",
+    "no_businesses": "No business registered yet.",
+    "block": "Block",
+    "unblock": "Unblock",
+    "blocked_badge": "Blocked",
+    "reservations": "All reservations",
+    "no_reservations": "No reservations yet.",
+    "col_basket": "Basket",
+    "col_business": "Business",
+    "col_client": "Client",
+    "col_status": "Status"
   },
   "common": {
     "loading": "Loading…",

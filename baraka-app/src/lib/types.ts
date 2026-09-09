@@ -1,4 +1,4 @@
-export type UserRole = 'client' | 'merchant'
+export type UserRole = 'client' | 'merchant' | 'admin'
 
 export interface Profile {
   id: string
@@ -21,9 +21,10 @@ export interface Business {
   whatsapp: string
   latitude: number
   longitude: number
+  blocked: boolean
 }
 
-export type BasketStatus = 'active' | 'sold_out' | 'expired' | 'cancelled'
+export type BasketStatus = 'active' | 'paused' | 'sold_out' | 'expired' | 'cancelled'
 
 export interface Basket {
   id: string

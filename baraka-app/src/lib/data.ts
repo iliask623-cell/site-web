@@ -2,6 +2,7 @@ import { isSupabaseConfigured, supabase } from './supabase'
 import { genId, genPickupCode, mockDb, subscribeMockDb } from './mockStore'
 import type {
   Basket,
+  BasketStatus,
   BasketWithBusiness,
   Business,
   BusinessCategory,
@@ -42,6 +43,7 @@ function mapBusiness(row: any): Business {
     whatsapp: row.whatsapp,
     latitude: Number(row.latitude),
     longitude: Number(row.longitude),
+    blocked: Boolean(row.blocked),
   }
 }
 
@@ -224,7 +226,7 @@ export async function createBusiness(input: CreateBusinessInput): Promise<Busine
     if (error) throw error
     return mapBusiness(data)
   }
-  const business: Business = { id: genId('biz'), ...input }
+  const business: Business = { id: genId('biz'), blocked: false, ...input }
   mockDb.set({ ...mockDb.state, businesses: [...mockDb.state.businesses, business] })
   return business
 }
@@ -253,7 +255,9 @@ export async function listActiveBaskets(filter: ExploreFilter = {}): Promise<Bas
     if (filter.wilaya) query = query.eq('business.wilaya', filter.wilaya)
     const { data, error } = await query.order('pickup_start', { ascending: true })
     if (error) throw error
-    let results = (data ?? []).map((row: any) => ({ ...mapBasket(row), business: mapBusiness(row.business) }))
+    let results = (data ?? [])
+      .map((row: any) => ({ ...mapBasket(row), business: mapBusiness(row.business) }))
+      .filter((b) => !b.business.blocked)
     if (filter.search) {
       const term = filter.search.toLowerCase()
       results = results.filter(
@@ -265,13 +269,13 @@ export async function listActiveBaskets(filter: ExploreFilter = {}): Promise<Bas
 
   const state = mockDb.state
   let baskets = state.baskets.filter((b) => b.status === 'active' && b.quantityAvailable > 0)
-  let businesses = state.businesses
+  let businesses = state.businesses.filter((b) => !b.blocked)
   if (filter.wilaya) {
     businesses = businesses.filter((b) => b.wilaya === filter.wilaya)
     const allowedIds = new Set(businesses.map((b) => b.id))
     baskets = baskets.filter((b) => allowedIds.has(b.businessId))
   }
-  let withBusiness = await attachBusinesses(baskets, state.businesses)
+  let withBusiness = await attachBusinesses(baskets, businesses)
   if (filter.search) {
     const term = filter.search.toLowerCase()
     withBusiness = withBusiness.filter(
@@ -369,6 +373,16 @@ export async function deleteBasket(id: string): Promise<void> {
     return
   }
   mockDb.set({ ...mockDb.state, baskets: mockDb.state.baskets.filter((b) => b.id !== id) })
+}
+
+export async function setBasketStatus(id: string, status: BasketStatus): Promise<void> {
+  if (supabase) {
+    const { error } = await supabase.from('baskets').update({ status }).eq('id', id)
+    if (error) throw error
+    return
+  }
+  const state = mockDb.state
+  mockDb.set({ ...state, baskets: state.baskets.map((b) => (b.id === id ? { ...b, status } : b)) })
 }
 
 // ---------------------------------------------------------------------------
@@ -496,6 +510,57 @@ export async function setReservationStatus(id: string, status: ReservationStatus
   }
   const state = mockDb.state
   mockDb.set({ ...state, reservations: state.reservations.map((r) => (r.id === id ? { ...r, status } : r)) })
+}
+
+// ---------------------------------------------------------------------------
+// Administration
+// ---------------------------------------------------------------------------
+export async function listAllBusinesses(): Promise<Business[]> {
+  if (supabase) {
+    const { data, error } = await supabase.from('businesses').select().order('name', { ascending: true })
+    if (error) throw error
+    return (data ?? []).map(mapBusiness)
+  }
+  return [...mockDb.state.businesses].sort((a, b) => a.name.localeCompare(b.name))
+}
+
+export async function setBusinessBlocked(id: string, blocked: boolean): Promise<void> {
+  if (supabase) {
+    const { error } = await supabase.from('businesses').update({ blocked }).eq('id', id)
+    if (error) throw error
+    return
+  }
+  const state = mockDb.state
+  mockDb.set({ ...state, businesses: state.businesses.map((b) => (b.id === id ? { ...b, blocked } : b)) })
+}
+
+export interface ReservationWithBasketAndBusiness extends Reservation {
+  basket: BasketWithBusiness
+  client: Profile
+}
+
+export async function listAllReservations(): Promise<ReservationWithBasketAndBusiness[]> {
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('reservations')
+      .select('*, basket:baskets(*, business:businesses(*)), client:profiles(*)')
+      .order('created_at', { ascending: false })
+    if (error) throw error
+    return (data ?? []).map((row: any) => ({
+      ...mapReservation(row),
+      basket: { ...mapBasket(row.basket), business: mapBusiness(row.basket.business) },
+      client: mapProfile(row.client),
+    }))
+  }
+  const state = mockDb.state
+  const results: ReservationWithBasketAndBusiness[] = []
+  for (const r of state.reservations) {
+    const basket = state.baskets.find((b) => b.id === r.basketId)
+    const business = basket ? state.businesses.find((b) => b.id === basket.businessId) : undefined
+    const client = state.profiles.find((p) => p.id === r.clientId)
+    if (basket && business && client) results.push({ ...r, basket: { ...basket, business }, client })
+  }
+  return results.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
 }
 
 export { isSupabaseConfigured }

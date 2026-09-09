@@ -1,5 +1,5 @@
 import type { Basket, Business, Profile, Reservation } from './types'
-import { seedBaskets, seedBusinesses, seedProfiles, seedReservations } from './mockData'
+import { seedBaskets, seedBusinesses, seedCredentials, seedProfiles, seedReservations } from './mockData'
 
 interface MockDb {
   profiles: Profile[]
@@ -10,7 +10,10 @@ interface MockDb {
   credentials: Record<string, { password: string; profileId: string }>
 }
 
-const STORAGE_KEY = 'baraka_mock_db_v1'
+// Bump this suffix whenever the shape of seeded/stored data changes, so
+// visitors with an older localStorage snapshot get a clean reseed instead
+// of a stale/incompatible shape.
+const STORAGE_KEY = 'baraka_mock_db_v2'
 
 function seedDb(): MockDb {
   return {
@@ -19,7 +22,7 @@ function seedDb(): MockDb {
     baskets: [...seedBaskets],
     reservations: [...seedReservations],
     currentUserId: null,
-    credentials: {},
+    credentials: { ...seedCredentials },
   }
 }
 

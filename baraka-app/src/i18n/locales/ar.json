@@ -7,6 +7,7 @@
     "explore": "استكشاف",
     "reservations": "حجوزاتي",
     "merchant": "فضاء التاجر",
+    "admin": "الإدارة",
     "login": "تسجيل الدخول",
     "logout": "تسجيل الخروج",
     "account": "حسابي"
@@ -58,6 +59,8 @@
     "filter_wilaya": "تصفية حسب الولاية",
     "view_list": "قائمة",
     "view_map": "خريطة",
+    "near_me": "بالقرب مني",
+    "location_error": "الموقع غير متاح — اسمح بالوصول إلى موقعك أو استخدم تصفية الولاية.",
     "all_wilayas": "كل الولايات",
     "search_placeholder": "ابحث عن تاجر، طبق…",
     "empty": "لا توجد سلال متوفرة لهذا الفلتر حاليًا.",
@@ -116,6 +119,9 @@
     "edit": "تعديل",
     "delete": "حذف",
     "delete_confirm": "حذف هذه السلة؟",
+    "pause": "إيقاف مؤقت",
+    "resume": "إعادة التفعيل",
+    "paused": "متوقف مؤقتًا",
     "no_baskets": "لم تنشر أي سلة بعد.",
     "incoming_reservations": "حجوزات يجب تلبيتها",
     "no_reservations": "لا توجد حجوزات حاليًا.",
@@ -129,6 +135,20 @@
       "hotel": "فندق / تموين",
       "other": "أخرى"
     }
+  },
+  "admin": {
+    "dashboard_title": "لوحة الإدارة",
+    "businesses": "التجار",
+    "no_businesses": "لا توجد تجارة مسجلة حاليًا.",
+    "block": "حظر",
+    "unblock": "إلغاء الحظر",
+    "blocked_badge": "محظور",
+    "reservations": "جميع الحجوزات",
+    "no_reservations": "لا توجد حجوزات حاليًا.",
+    "col_basket": "السلة",
+    "col_business": "التجارة",
+    "col_client": "العميل",
+    "col_status": "الحالة"
   },
   "common": {
     "loading": "جارٍ التحميل…",

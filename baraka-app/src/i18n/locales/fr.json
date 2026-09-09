@@ -7,6 +7,7 @@
     "explore": "Explorer",
     "reservations": "Mes réservations",
     "merchant": "Espace commerçant",
+    "admin": "Administration",
     "login": "Connexion",
     "logout": "Déconnexion",
     "account": "Mon compte"
@@ -58,6 +59,8 @@
     "filter_wilaya": "Filtrer par wilaya",
     "view_list": "Liste",
     "view_map": "Carte",
+    "near_me": "Près de moi",
+    "location_error": "Localisation indisponible — autorise l'accès à ta position ou utilise le filtre par wilaya.",
     "all_wilayas": "Toutes les wilayas",
     "search_placeholder": "Rechercher un commerce, un plat…",
     "empty": "Aucun panier disponible pour ce filtre en ce moment.",
@@ -116,6 +119,9 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "delete_confirm": "Supprimer ce panier ?",
+    "pause": "Mettre en pause",
+    "resume": "Réactiver",
+    "paused": "En pause",
     "no_baskets": "Tu n'as encore publié aucun panier.",
     "incoming_reservations": "Réservations à honorer",
     "no_reservations": "Aucune réservation pour le moment.",
@@ -129,6 +135,20 @@
       "hotel": "Hôtel / Traiteur",
       "other": "Autre"
     }
+  },
+  "admin": {
+    "dashboard_title": "Panel administrateur",
+    "businesses": "Commerces",
+    "no_businesses": "Aucun commerce enregistré pour le moment.",
+    "block": "Bloquer",
+    "unblock": "Débloquer",
+    "blocked_badge": "Bloqué",
+    "reservations": "Toutes les réservations",
+    "no_reservations": "Aucune réservation pour le moment.",
+    "col_basket": "Panier",
+    "col_business": "Commerce",
+    "col_client": "Client",
+    "col_status": "Statut"
   },
   "common": {
     "loading": "Chargement…",

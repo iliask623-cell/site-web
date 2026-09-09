@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Plus, Trash2 } from 'lucide-react'
+import { Pause, Play, Plus, Trash2 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import {
   createBasket,
@@ -9,6 +9,7 @@ import {
   getMyBusiness,
   listBusinessBaskets,
   listBusinessReservations,
+  setBasketStatus,
   setReservationStatus,
   type ReservationWithClient,
 } from '../../lib/data'
@@ -168,6 +169,11 @@ function BusinessPanel({ business }: { business: Business }) {
     refresh()
   }
 
+  async function handleTogglePause(b: Basket) {
+    await setBasketStatus(b.id, b.status === 'paused' ? 'active' : 'paused')
+    refresh()
+  }
+
   async function handleStatus(id: string, status: 'picked_up' | 'no_show') {
     await setReservationStatus(id, status)
     refresh()
@@ -214,15 +220,26 @@ function BusinessPanel({ business }: { business: Business }) {
                   <p className="text-sm text-brand-800/60">
                     {formatDzd(b.priceDiscounted, lang)} · {b.quantityAvailable}/{b.quantityTotal}
                     {b.status === 'sold_out' && ` · ${t('explore.sold_out')}`}
+                    {b.status === 'paused' && ` · ${t('merchant.paused')}`}
                   </p>
                 </div>
-                <button
-                  onClick={() => handleDelete(b.id)}
-                  className="rounded-full p-2 text-red-500 hover:bg-red-50"
-                  aria-label={t('merchant.delete') ?? ''}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => handleTogglePause(b)}
+                    className="rounded-full p-2 text-brand-600 hover:bg-brand-50"
+                    aria-label={t(b.status === 'paused' ? 'merchant.resume' : 'merchant.pause') ?? ''}
+                    title={t(b.status === 'paused' ? 'merchant.resume' : 'merchant.pause') ?? ''}
+                  >
+                    {b.status === 'paused' ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
+                  </button>
+                  <button
+                    onClick={() => handleDelete(b.id)}
+                    className="rounded-full p-2 text-red-500 hover:bg-red-50"
+                    aria-label={t('merchant.delete') ?? ''}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
             ))}
           </div>

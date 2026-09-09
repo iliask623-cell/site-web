@@ -10,24 +10,38 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   full_name text not null,
   phone text not null default '',
-  role text not null check (role in ('client', 'merchant')) default 'client',
+  role text not null check (role in ('client', 'merchant', 'admin')) default 'client',
   wilaya text not null default '16',
   created_at timestamptz not null default now()
 );
 
 alter table public.profiles enable row level security;
 
+-- Helper used by policies below. security definer + a fixed search_path so
+-- it can read public.profiles regardless of the caller's own RLS grants.
+create or replace function public.is_admin()
+returns boolean as $$
+  select exists (
+    select 1 from public.profiles where id = auth.uid() and role = 'admin'
+  );
+$$ language sql security definer set search_path = public;
+
 create policy "profiles are viewable by everyone"
   on public.profiles for select
   using (true);
 
-create policy "users can insert their own profile"
+-- IMPORTANT: the admin role must never be self-assignable through the app.
+-- Signup always inserts as 'client' or 'merchant'; promote an account to
+-- 'admin' by hand from the Supabase dashboard (Table editor > profiles),
+-- or with: update public.profiles set role = 'admin' where id = '<uuid>';
+create policy "users can insert their own non-admin profile"
   on public.profiles for insert
-  with check (auth.uid() = id);
+  with check (auth.uid() = id and role <> 'admin');
 
-create policy "users can update their own profile"
+create policy "users can update their own non-admin profile"
   on public.profiles for update
-  using (auth.uid() = id);
+  using (auth.uid() = id)
+  with check (role <> 'admin' or public.is_admin());
 
 -- ---------------------------------------------------------------------------
 -- Commerces
@@ -43,6 +57,7 @@ create table if not exists public.businesses (
   whatsapp text not null default '',
   latitude double precision not null,
   longitude double precision not null,
+  blocked boolean not null default false,
   created_at timestamptz not null default now()
 );
 
@@ -55,7 +70,30 @@ create policy "businesses are viewable by everyone"
 create policy "owners manage their own business"
   on public.businesses for all
   using (auth.uid() = owner_id)
-  with check (auth.uid() = owner_id);
+  with check (auth.uid() = owner_id and blocked = false);
+
+create policy "admins manage any business"
+  on public.businesses for update
+  using (public.is_admin())
+  with check (public.is_admin());
+
+-- Belt-and-suspenders: even if a future policy change lets an owner reach
+-- an UPDATE, this trigger silently keeps `blocked` unless the caller is an
+-- admin, so a blocked merchant can never unblock themselves through the app.
+create or replace function public.protect_business_blocked_field()
+returns trigger as $$
+begin
+  if new.blocked <> old.blocked and not public.is_admin() then
+    new.blocked = old.blocked;
+  end if;
+  return new;
+end;
+$$ language plpgsql security definer set search_path = public;
+
+drop trigger if exists on_business_update_guard_blocked on public.businesses;
+create trigger on_business_update_guard_blocked
+  before update on public.businesses
+  for each row execute function public.protect_business_blocked_field();
 
 -- ---------------------------------------------------------------------------
 -- Paniers surprise
@@ -71,7 +109,7 @@ create table if not exists public.baskets (
   quantity_available int not null check (quantity_available >= 0),
   pickup_start timestamptz not null,
   pickup_end timestamptz not null,
-  status text not null check (status in ('active', 'sold_out', 'expired', 'cancelled')) default 'active',
+  status text not null check (status in ('active', 'paused', 'sold_out', 'expired', 'cancelled')) default 'active',
   is_iftar boolean not null default false,
   created_at timestamptz not null default now()
 );
@@ -137,6 +175,10 @@ create policy "clients cancel their own reservations"
       where bk.id = basket_id and b.owner_id = auth.uid()
     )
   );
+
+create policy "admins view all reservations"
+  on public.reservations for select
+  using (public.is_admin());
 
 -- ---------------------------------------------------------------------------
 -- Décrémente la quantité disponible à la réservation, la restaure à l'annulation

@@ -15,6 +15,7 @@ export const seedBusinesses: Business[] = [
     whatsapp: '+213550000001',
     latitude: 36.7181,
     longitude: 3.1875,
+    blocked: false,
   },
   {
     id: 'biz-2',
@@ -27,6 +28,7 @@ export const seedBusinesses: Business[] = [
     whatsapp: '+213550000002',
     latitude: 35.6369,
     longitude: -0.6172,
+    blocked: false,
   },
   {
     id: 'biz-3',
@@ -39,6 +41,7 @@ export const seedBusinesses: Business[] = [
     whatsapp: '+213550000003',
     latitude: 36.1898,
     longitude: 5.4108,
+    blocked: false,
   },
   {
     id: 'biz-4',
@@ -51,6 +54,7 @@ export const seedBusinesses: Business[] = [
     whatsapp: '+213550000004',
     latitude: 36.365,
     longitude: 6.6147,
+    blocked: false,
   },
 ]
 
@@ -137,6 +141,14 @@ export const seedProfiles: Profile[] = [
   { id: 'merchant-demo-2', fullName: 'Amina S.', phone: '+213550000002', role: 'merchant', wilaya: '31' },
   { id: 'merchant-demo-3', fullName: 'Yacine T.', phone: '+213550000003', role: 'merchant', wilaya: '19' },
   { id: 'merchant-demo-4', fullName: 'Nadia R.', phone: '+213550000004', role: 'merchant', wilaya: '25' },
+  { id: 'admin-demo-1', fullName: 'Admin Baraka', phone: '+213550000000', role: 'admin', wilaya: '16' },
 ]
+
+// Compte admin de démo, pré-enregistré pour pouvoir tester le panel admin
+// sans passer par un formulaire d'inscription (le rôle admin ne doit jamais
+// être auto-attribuable via signup — voir supabase/schema.sql).
+export const seedCredentials: Record<string, { password: string; profileId: string }> = {
+  'admin@baraka.dz': { password: 'admin123', profileId: 'admin-demo-1' },
+}
 
 export const seedReservations: Reservation[] = []

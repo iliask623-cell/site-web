@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { List, Map as MapIcon, Search } from 'lucide-react'
+import { List, LocateFixed, Map as MapIcon, Search } from 'lucide-react'
 import { listActiveBaskets } from '../lib/data'
 import type { BasketWithBusiness } from '../lib/types'
 import { WILAYAS, wilayaCenter } from '../lib/wilayas'
+import { distanceKm } from '../lib/geo'
 import BasketCard from '../components/BasketCard'
 import MapView, { type MapMarker } from '../components/MapView'
 
@@ -17,6 +18,8 @@ export default function Explore() {
   const [wilaya, setWilaya] = useState('')
   const [search, setSearch] = useState('')
   const [view, setView] = useState<'list' | 'map'>('list')
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
+  const [geoStatus, setGeoStatus] = useState<'idle' | 'loading' | 'error'>('idle')
 
   useEffect(() => {
     let cancelled = false
@@ -35,30 +38,57 @@ export default function Explore() {
 
   const hasIftar = useMemo(() => baskets.some((b) => b.isIftar), [baskets])
 
+  const sortedBaskets = useMemo(() => {
+    if (!userLocation) return baskets
+    const [uLat, uLng] = userLocation
+    return [...baskets].sort(
+      (a, b) =>
+        distanceKm(uLat, uLng, a.business.latitude, a.business.longitude) -
+        distanceKm(uLat, uLng, b.business.latitude, b.business.longitude),
+    )
+  }, [baskets, userLocation])
+
   const markers: MapMarker[] = useMemo(() => {
     const byBusiness = new Map<string, { basketId: string; business: BasketWithBusiness['business']; count: number }>()
-    for (const b of baskets) {
+    for (const b of sortedBaskets) {
       const existing = byBusiness.get(b.business.id)
       if (existing) existing.count += 1
       else byBusiness.set(b.business.id, { basketId: b.id, business: b.business, count: 1 })
     }
-    return Array.from(byBusiness.values()).map(({ basketId, business, count }) => ({
+    const businessMarkers = Array.from(byBusiness.values()).map(({ basketId, business, count }) => ({
       id: basketId,
       lat: business.latitude,
       lng: business.longitude,
       label: business.name,
       sublabel: t(count === 1 ? 'explore.left_one' : 'explore.left_other', { count }) as string,
     }))
-  }, [baskets, t])
+    return businessMarkers
+  }, [sortedBaskets, t])
 
-  const mapCenter: [number, number] = wilaya ? wilayaCenter(wilaya) : [36.6, 3.5]
-  const mapZoom = wilaya ? 12 : 6
+  function handleLocateMe() {
+    if (!navigator.geolocation) {
+      setGeoStatus('error')
+      return
+    }
+    setGeoStatus('loading')
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLocation([pos.coords.latitude, pos.coords.longitude])
+        setGeoStatus('idle')
+      },
+      () => setGeoStatus('error'),
+      { enableHighAccuracy: true, timeout: 10000 },
+    )
+  }
+
+  const mapCenter: [number, number] = userLocation ?? (wilaya ? wilayaCenter(wilaya) : [36.6, 3.5])
+  const mapZoom = userLocation ? 13 : wilaya ? 12 : 6
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="mb-6 text-2xl font-bold text-brand-900">{t('explore.title')}</h1>
 
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row">
+      <div className="mb-3 flex flex-col gap-3 sm:flex-row">
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-800/40 rtl:left-auto rtl:right-3" />
           <input
@@ -96,6 +126,20 @@ export default function Explore() {
         </div>
       </div>
 
+      <div className="mb-6 flex items-center gap-3">
+        <button
+          onClick={handleLocateMe}
+          disabled={geoStatus === 'loading'}
+          className={`flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors disabled:opacity-60 ${
+            userLocation ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-brand-200 text-brand-700 hover:bg-brand-50'
+          }`}
+        >
+          <LocateFixed className="h-4 w-4" />
+          {geoStatus === 'loading' ? t('common.loading') : t('explore.near_me')}
+        </button>
+        {geoStatus === 'error' && <span className="text-xs text-clay-600">{t('explore.location_error')}</span>}
+      </div>
+
       {hasIftar && (
         <p className="mb-6 rounded-xl bg-clay-400/10 px-4 py-3 text-sm font-medium text-clay-600">
           {t('landing.ramadan_banner')}
@@ -104,7 +148,7 @@ export default function Explore() {
 
       {loading ? (
         <p className="text-brand-800/60">{t('common.loading')}</p>
-      ) : baskets.length === 0 ? (
+      ) : sortedBaskets.length === 0 ? (
         <p className="rounded-xl border border-dashed border-brand-200 px-6 py-12 text-center text-brand-800/60">
           {t('explore.empty')}
         </p>
@@ -112,8 +156,16 @@ export default function Explore() {
         <MapView markers={markers} center={mapCenter} zoom={mapZoom} onMarkerClick={(id) => navigate(`/basket/${id}`)} />
       ) : (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {baskets.map((basket) => (
-            <BasketCard key={basket.id} basket={basket} />
+          {sortedBaskets.map((basket) => (
+            <BasketCard
+              key={basket.id}
+              basket={basket}
+              distanceKm={
+                userLocation
+                  ? distanceKm(userLocation[0], userLocation[1], basket.business.latitude, basket.business.longitude)
+                  : undefined
+              }
+            />
           ))}
         </div>
       )}

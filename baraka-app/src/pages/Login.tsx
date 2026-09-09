@@ -23,7 +23,8 @@ export default function Login() {
       const profile = await signIn(email, password)
       setProfile(profile)
       const redirectTo = (location.state as { from?: string } | null)?.from
-      navigate(redirectTo ?? (profile.role === 'merchant' ? '/merchant' : '/explore'))
+      const roleHome = profile.role === 'merchant' ? '/merchant' : profile.role === 'admin' ? '/admin' : '/explore'
+      navigate(redirectTo ?? roleHome)
     } catch (err) {
       setError(err instanceof Error ? err.message : t('common.error_generic'))
     } finally {

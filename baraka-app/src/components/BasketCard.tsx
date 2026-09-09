@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import type { BasketWithBusiness } from '../lib/types'
 import { discountPercent, formatDzd } from '../lib/currency'
 import { wilayaName } from '../lib/wilayas'
+import { formatDistance } from '../lib/geo'
 
 function formatTime(iso: string, lang: string) {
   return new Date(iso).toLocaleTimeString(lang === 'ar' ? 'ar-DZ' : 'fr-DZ', {
@@ -11,7 +12,7 @@ function formatTime(iso: string, lang: string) {
   })
 }
 
-export default function BasketCard({ basket }: { basket: BasketWithBusiness }) {
+export default function BasketCard({ basket, distanceKm }: { basket: BasketWithBusiness; distanceKm?: number }) {
   const { t, i18n } = useTranslation()
   const lang = i18n.resolvedLanguage ?? 'fr'
   const soldOut = basket.status === 'sold_out' || basket.quantityAvailable <= 0
@@ -24,7 +25,9 @@ export default function BasketCard({ basket }: { basket: BasketWithBusiness }) {
     >
       <div className="flex items-center justify-between bg-brand-50 px-4 py-2">
         <span className="text-xs font-semibold text-brand-700">{basket.business.name}</span>
-        <span className="text-xs text-brand-600">{wilayaName(basket.business.wilaya, lang)}</span>
+        <span className="text-xs text-brand-600">
+          {distanceKm !== undefined ? formatDistance(distanceKm) : wilayaName(basket.business.wilaya, lang)}
+        </span>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="flex items-start justify-between gap-2">
