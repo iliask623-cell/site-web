@@ -14,8 +14,9 @@ import {
 } from '../../lib/data'
 import type { Basket, Business, BusinessCategory } from '../../lib/types'
 import { formatDzd } from '../../lib/currency'
-import { WILAYAS } from '../../lib/wilayas'
+import { WILAYAS, wilayaCenter } from '../../lib/wilayas'
 import { Field } from '../Login'
+import LocationPicker from '../../components/LocationPicker'
 
 const CATEGORIES: BusinessCategory[] = ['bakery', 'restaurant', 'grocery', 'hotel', 'other']
 
@@ -47,15 +48,32 @@ function CreateBusinessForm({ ownerId, onCreated }: { ownerId: string; onCreated
   const [commune, setCommune] = useState('')
   const [address, setAddress] = useState('')
   const [whatsapp, setWhatsapp] = useState('')
+  const [location, setLocation] = useState<[number, number]>(wilayaCenter('16'))
+  const [locationTouched, setLocationTouched] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  function handleWilayaChange(code: string) {
+    setWilaya(code)
+    if (!locationTouched) setLocation(wilayaCenter(code))
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSubmitting(true)
     setError(null)
     try {
-      const business = await createBusiness({ ownerId, name, category, wilaya, commune, address, whatsapp })
+      const business = await createBusiness({
+        ownerId,
+        name,
+        category,
+        wilaya,
+        commune,
+        address,
+        whatsapp,
+        latitude: location[0],
+        longitude: location[1],
+      })
       onCreated(business)
     } catch (err) {
       setError(err instanceof Error ? err.message : t('common.error_generic'))
@@ -81,7 +99,7 @@ function CreateBusinessForm({ ownerId, onCreated }: { ownerId: string; onCreated
           </select>
         </Field>
         <Field label={t('auth.wilaya')}>
-          <select value={wilaya} onChange={(e) => setWilaya(e.target.value)} className="input">
+          <select value={wilaya} onChange={(e) => handleWilayaChange(e.target.value)} className="input">
             {WILAYAS.map((w) => (
               <option key={w.code} value={w.code}>
                 {w.code} - {lang === 'ar' ? w.ar : w.fr}
@@ -95,6 +113,14 @@ function CreateBusinessForm({ ownerId, onCreated }: { ownerId: string; onCreated
         <Field label={t('merchant.address')}>
           <input required value={address} onChange={(e) => setAddress(e.target.value)} className="input" />
         </Field>
+        <LocationPicker
+          value={location}
+          defaultCenter={wilayaCenter(wilaya)}
+          onChange={(lat, lng) => {
+            setLocationTouched(true)
+            setLocation([lat, lng])
+          }}
+        />
         <Field label={t('merchant.whatsapp_number')}>
           <input
             required

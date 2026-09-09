@@ -56,6 +56,8 @@
   "explore": {
     "title": "Available baskets",
     "filter_wilaya": "Filter by wilaya",
+    "view_list": "List",
+    "view_map": "Map",
     "all_wilayas": "All wilayas",
     "search_placeholder": "Search a shop, a dish…",
     "empty": "No baskets available for this filter right now.",
@@ -98,6 +100,7 @@
     "commune": "Commune",
     "address": "Address",
     "whatsapp_number": "WhatsApp number",
+    "location_hint": "Click on the map or drag the pin to set the exact location of the business.",
     "save": "Save",
     "my_baskets": "My baskets",
     "new_basket": "New basket",

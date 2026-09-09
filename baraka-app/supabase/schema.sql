@@ -41,6 +41,8 @@ create table if not exists public.businesses (
   commune text not null default '',
   address text not null default '',
   whatsapp text not null default '',
+  latitude double precision not null,
+  longitude double precision not null,
   created_at timestamptz not null default now()
 );
 

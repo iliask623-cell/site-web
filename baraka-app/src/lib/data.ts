@@ -40,6 +40,8 @@ function mapBusiness(row: any): Business {
     commune: row.commune,
     address: row.address,
     whatsapp: row.whatsapp,
+    latitude: Number(row.latitude),
+    longitude: Number(row.longitude),
   }
 }
 
@@ -189,6 +191,8 @@ export interface CreateBusinessInput {
   commune: string
   address: string
   whatsapp: string
+  latitude: number
+  longitude: number
 }
 
 export async function getMyBusiness(ownerId: string): Promise<Business | null> {
@@ -212,6 +216,8 @@ export async function createBusiness(input: CreateBusinessInput): Promise<Busine
         commune: input.commune,
         address: input.address,
         whatsapp: input.whatsapp,
+        latitude: input.latitude,
+        longitude: input.longitude,
       })
       .select()
       .single()

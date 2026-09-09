@@ -56,6 +56,8 @@
   "explore": {
     "title": "Paniers disponibles",
     "filter_wilaya": "Filtrer par wilaya",
+    "view_list": "Liste",
+    "view_map": "Carte",
     "all_wilayas": "Toutes les wilayas",
     "search_placeholder": "Rechercher un commerce, un plat…",
     "empty": "Aucun panier disponible pour ce filtre en ce moment.",
@@ -98,6 +100,7 @@
     "commune": "Commune",
     "address": "Adresse",
     "whatsapp_number": "Numéro WhatsApp",
+    "location_hint": "Clique sur la carte ou déplace le repère pour indiquer l'emplacement exact du commerce.",
     "save": "Enregistrer",
     "my_baskets": "Mes paniers",
     "new_basket": "Nouveau panier",

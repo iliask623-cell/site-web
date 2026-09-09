@@ -7,6 +7,7 @@ import type { BasketWithBusiness } from '../lib/types'
 import { discountPercent, formatDzd } from '../lib/currency'
 import { wilayaName } from '../lib/wilayas'
 import { useAuth } from '../context/AuthContext'
+import MapView from '../components/MapView'
 
 function formatDateTime(iso: string, lang: string) {
   return new Date(iso).toLocaleString(lang === 'ar' ? 'ar-DZ' : 'fr-DZ', {
@@ -105,6 +106,22 @@ export default function BasketDetail() {
               {basket.business.address}, {basket.business.commune}, {wilayaName(basket.business.wilaya, lang)}
             </span>
           </div>
+        </div>
+
+        <div className="mb-6">
+          <MapView
+            markers={[
+              {
+                id: basket.id,
+                lat: basket.business.latitude,
+                lng: basket.business.longitude,
+                label: basket.business.name,
+              },
+            ]}
+            center={[basket.business.latitude, basket.business.longitude]}
+            zoom={15}
+            height={220}
+          />
         </div>
 
         <div className="mb-6 flex flex-wrap gap-3">

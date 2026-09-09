@@ -13,6 +13,8 @@ export const seedBusinesses: Business[] = [
     commune: 'Bab Ezzouar',
     address: 'Rue des Frères Boukhelifa, Bab Ezzouar, Alger',
     whatsapp: '+213550000001',
+    latitude: 36.7181,
+    longitude: 3.1875,
   },
   {
     id: 'biz-2',
@@ -23,6 +25,8 @@ export const seedBusinesses: Business[] = [
     commune: 'Es Senia',
     address: 'Boulevard de la Soummam, Oran',
     whatsapp: '+213550000002',
+    latitude: 35.6369,
+    longitude: -0.6172,
   },
   {
     id: 'biz-3',
@@ -33,6 +37,8 @@ export const seedBusinesses: Business[] = [
     commune: 'Sétif Centre',
     address: 'Avenue du 8 Mai 1945, Sétif',
     whatsapp: '+213550000003',
+    latitude: 36.1898,
+    longitude: 5.4108,
   },
   {
     id: 'biz-4',
@@ -43,6 +49,8 @@ export const seedBusinesses: Business[] = [
     commune: 'Constantine Centre',
     address: 'Rue Larbi Ben M\'hidi, Constantine',
     whatsapp: '+213550000004',
+    latitude: 36.365,
+    longitude: 6.6147,
   },
 ]
 

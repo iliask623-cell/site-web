@@ -19,6 +19,8 @@ export interface Business {
   commune: string
   address: string
   whatsapp: string
+  latitude: number
+  longitude: number
 }
 
 export type BasketStatus = 'active' | 'sold_out' | 'expired' | 'cancelled'
