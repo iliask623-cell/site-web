@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+
+  --color-brand-50: #eef7f0;
+  --color-brand-100: #d3ecd9;
+  --color-brand-200: #a8d9b5;
+  --color-brand-300: #78c091;
+  --color-brand-400: #46a26d;
+  --color-brand-500: #1f6b3e;
+  --color-brand-600: #195c34;
+  --color-brand-700: #144a2a;
+  --color-brand-800: #103a21;
+  --color-brand-900: #0c2c19;
+
+  --color-sand-50: #fbf8f2;
+  --color-sand-100: #f4ede1;
+  --color-sand-200: #e9dcc6;
+  --color-sand-300: #dcc7a3;
+
+  --color-clay-400: #e0793c;
+  --color-clay-500: #cf6527;
+  --color-clay-600: #b0531f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-sand-50);
+  color: var(--color-brand-900);
+}
+
+html[dir="rtl"] {
+  font-family: "Tajawal", "Segoe UI", system-ui, sans-serif;
+}
+
+::selection {
+  background-color: var(--color-brand-200);
+}
+
+@layer components {
+  .input {
+    @apply w-full rounded-xl border border-brand-200 bg-white px-3.5 py-2.5 text-brand-900 outline-none transition-colors focus:border-brand-500;
+  }
+}
