@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
@@ -10,10 +10,14 @@ import MerchantDashboard from './pages/merchant/MerchantDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import { AuthProvider } from './context/AuthContext'
 
+// Preview builds (e.g. embedded as a static artifact, without a server that
+// rewrites deep links to index.html) use hash-based routing instead.
+const Router = import.meta.env.VITE_ROUTER_MODE === 'hash' ? HashRouter : BrowserRouter
+
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <Router>
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Landing />} />
@@ -39,7 +43,7 @@ export default function App() {
             />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </AuthProvider>
   )
 }
