@@ -1,9 +1,0 @@
-[build]
-  functions = "netlify/functions"
-  publish = "public"
-
-[functions]
-  node_bundler = "esbuild"
-
-# Les fonctions planifiées (sync-inventory, sync-tracking) déclarent leur propre
-# cron via `export const config = { schedule: "..." }` dans le fichier de la fonction.
