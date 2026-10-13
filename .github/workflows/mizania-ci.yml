@@ -1,0 +1,47 @@
+name: MIZANIA CI
+
+on:
+  push:
+    paths: ["mizania/**", ".github/workflows/mizania-ci.yml"]
+  pull_request:
+    paths: ["mizania/**", ".github/workflows/mizania-ci.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mizania
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mizania/package-lock.json
+      - name: Créer le rôle applicatif (sans SUPERUSER ni BYPASSRLS) et la base de test
+        env:
+          PGPASSWORD: postgres
+        run: |
+          psql -h localhost -U postgres -c "CREATE ROLE mizania LOGIN PASSWORD 'mizania';"
+          psql -h localhost -U postgres -c "CREATE DATABASE mizania_test OWNER mizania;"
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run db:migrate:test
+      - run: npm test
+      - run: npm run build
+        env:
+          DATABASE_URL: postgres://mizania:mizania@localhost:5432/mizania_test
