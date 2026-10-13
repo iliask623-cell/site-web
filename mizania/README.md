@@ -7,6 +7,7 @@ leurs recettes, dépenses, factures et trésorerie, et à comprendre leur compta
 **SCF (Système Comptable Financier algérien)**. MIZANIA est un outil d'assistance : il ne remplace
 pas un expert-comptable, un commissaire aux comptes ni les sources officielles.
 
+> ⚖️ Textes, règles à vérifier, données personnelles : [`docs/CONFORMITE.md`](docs/CONFORMITE.md)
 > 📐 Architecture, modèle de données, plan de développement et tests : [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 
 ## État d'avancement
@@ -15,6 +16,7 @@ pas un expert-comptable, un commissaire aux comptes ni les sources officielles.
 |---|---|---|
 | 1 | Architecture, squelette, outillage, module monétaire, identité visuelle de base | ✅ testée |
 | 2 | Base de données : identité, organisations, contacts, catégories, recettes/dépenses, isolation RLS | ✅ testée |
+| 2 bis | Référentiel réglementaire versionné (sources, taxes, règles fiscales, mentions de facture), résolveur fiscal sans valeur par défaut | ✅ testée |
 | 3 → 10 | Authentification, dashboard, CRUD, facturation, moteur SCF, IA, exports… | ⏳ à venir |
 
 Rien de ce qui n'est pas marqué ✅ n'est disponible dans l'application.
@@ -51,7 +53,11 @@ psql -U postgres -c "CREATE DATABASE mizania_test OWNER mizania;"
 # Puis :
 npm run db:migrate        # base de développement (.env.local)
 npm run db:migrate:test   # base de test (.env.test)
+npm run db:seed-reference # sources, taxes et mentions de facture — toutes « à vérifier »
 ```
+
+> L'extension `btree_gist` est créée par les migrations (contrainte anti-chevauchement des règles
+> fiscales). Elle est disponible sur PostgreSQL standard, Neon et Supabase.
 
 ### Migrations
 

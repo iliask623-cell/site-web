@@ -60,6 +60,12 @@ export const activityTypeEnum = pgEnum("activity_type", [
 ]);
 
 /**
+ * Assujettissement à la TVA tel que DÉCLARÉ par l'entreprise. Tant qu'il est
+ * `unknown`, aucune règle de TVA n'est appliquée automatiquement.
+ */
+export const vatLiabilityEnum = pgEnum("vat_liability", ["unknown", "subject", "not_subject"]);
+
+/**
  * L'« activité » de l'entrepreneur. Toutes les données métier lui sont
  * rattachées ; plusieurs utilisateurs pourront y accéder via `memberships`.
  */
@@ -81,6 +87,9 @@ export const organizations = pgTable(
     nis: text("nis"),
     rc: text("rc"),
     articleImposition: text("article_imposition"),
+    vatLiability: vatLiabilityEnum("vat_liability").notNull().default("unknown"),
+    /** Régime fiscal déclaré (codes gérés par l'administration). NULL = inconnu. */
+    taxRegimeCode: text("tax_regime_code"),
     fiscalYearStartMonth: smallint("fiscal_year_start_month").notNull().default(1),
     /** Données de démonstration : jamais mélangées aux données réelles. */
     isDemo: boolean("is_demo").notNull().default(false),

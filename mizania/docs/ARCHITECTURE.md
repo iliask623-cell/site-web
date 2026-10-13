@@ -124,12 +124,18 @@ Conventions : clés `uuid` ; horodatages `timestamptz` ; **montants en `bigint` 
 | `invoices` / `invoice_lines` | Factures (numéro unique par organisation, statut, dates, totaux calculés serveur) et lignes (quantité en millièmes, prix unitaire en centimes, remise, taux de taxe référencé) |
 | `documents` | Justificatifs (métadonnées ; fichier dans un stockage objet privé) liés à transaction/facture |
 
-### Référentiels versionnés (globaux, lecture seule pour les utilisateurs)
+### Référentiels versionnés (globaux, lecture seule pour les utilisateurs) — ✅ en base
 | Table | Rôle |
 |---|---|
-| `official_sources` | Sources : émetteur (DGI, MF, JORADP…), titre, référence, date, URL, date de dernière vérification |
-| `scf_accounts` | Nomenclature SCF : numéro, intitulé, classe, parent, nature, description, exemples, **version du référentiel**, source, **statut de vérification**, date de vérification |
-| `tax_rules` | Règles fiscales : code, libellé, valeur (taux en points de base, seuil en centimes…), **valid_from / valid_to**, année, source, version, statut (`draft`, `to_verify`, `verified`, `retired`) |
+| `official_sources` | Sources : émetteur (JO, MF, DGI, Commerce, ANPDP…), nature (loi, décret, arrêté…), référence, titre, JO, URL, **provenance** (d'où vient l'info, ce qui reste à confirmer), statut, vérifié par / le |
+| `taxes` | Catalogue des impôts et taxes (TVA, IBS, IRG, TAP, IFU) — **aucun taux** |
+| `tax_rules` | Règles fiscales : code stable, taxe, nature (`rate`, `threshold`, `exemption`, `regime_condition`), taux en points de base / seuil en centimes, conditions, exonérations, **valid_from / valid_to**, exercice, source, article, version, statut (`draft`, `to_verify`, `verified`, `retired`), vérifié par / le |
+| `invoice_mention_rules` | Mentions de facture configurables : portée (vendeur, acheteur, document, ligne), donnée contrôlée (`seller.rc`…), condition d'application, période, source, article, version, statut |
+| `scf_accounts` | Nomenclature SCF (Phase 8) : numéro, intitulé, classe, parent, nature, description, exemples, version du référentiel, source, statut de vérification |
+
+Garanties en base : une règle `verified` a obligatoirement une source et une date de vérification ; deux versions vérifiées d'une même règle ne peuvent pas se chevaucher dans le temps (contrainte d'exclusion) ; un taux est borné à 0–100 %.
+
+L'organisation porte son **profil fiscal déclaré** : `vat_liability` (`unknown` par défaut, `subject`, `not_subject`) et `tax_regime_code` (NULL = inconnu). Tant que le profil est inconnu, aucune règle fiscale n'est appliquée automatiquement.
 
 ### Comptabilité (couche SCF)
 | Table | Rôle |
@@ -201,7 +207,8 @@ Toutes les mutations métier passent par des **Server Actions** qui : (1) vérif
 - **Jamais de compte inventé** : une proposition (IA comprise) ne peut référencer qu'un compte **présent** dans la table. Si aucun compte fiable n'est trouvé, la réponse est : *« Information insuffisante pour confirmer le compte SCF approprié. Vérification recommandée. »*
 - **Le contenu du référentiel** n'est importé qu'à partir du texte officiel (Arrêté du 26 juillet 2008 fixant notamment la nomenclature et les règles de fonctionnement des comptes, publié au Journal officiel). Tant qu'un compte n'a pas été vérifié contre ce texte par un humain, il porte le statut `to_verify` et l'interface l'affiche. **Action requise de votre part** : fournir (ou valider) une copie fiable de la nomenclature ; l'outil d'import est prévu en Phase 8.
 - **Validation = action humaine explicite.** Une écriture proposée par l'IA est enregistrée en brouillon uniquement si l'utilisateur la sauvegarde, et validée uniquement s'il clique « Valider ».
-- **Couche fiscale séparée** (`server/tax`) : taux et seuils lus dans `tax_rules` à la **date de l'opération** (`valid_from ≤ date < valid_to`). Si aucune règle vérifiée n'existe, le calcul fiscal est marqué « non déterminé — à vérifier » au lieu d'utiliser une valeur par défaut.
+- **Couche fiscale séparée** (`server/tax/resolve.ts`, ✅ testée) : une règle n'est appliquée que si elle est **vérifiée, sourcée et en vigueur à la date de l'opération** (`valid_from ≤ date < valid_to`). Sinon le résultat est « non déterminé » avec la raison (aucune règle / règle non vérifiée, montrée comme candidate « à vérifier »). Pour la TVA, `resolveVatRate` renvoie d'abord « profil incomplet » si l'assujettissement de l'entreprise est inconnu, et « non applicable » si elle est déclarée non assujettie. Aucune valeur par défaut, jamais.
+- **Décret exécutif n° 09-110 du 7 avril 2009** (tenue de la comptabilité au moyen de systèmes informatiques) : texte directement applicable à MIZANIA, à lire avant la Phase 8. Il peut imposer des exigences sur l'irréversibilité des validations, la traçabilité ou la conservation. Le moteur est conçu pour cela (écritures validées immuables, correction par contre-passation, journal d'audit), mais la conformité ne pourra être affirmée qu'après lecture du texte.
 
 ---
 
@@ -228,13 +235,40 @@ UI (chat) ─► /api/ai/chat ─► AiService ─► AIProvider (interface)
 
 ---
 
+## 8 bis. Facturation (conception détaillée — Phase 7)
+
+Cadre : droit commercial (décret exécutif n° 05-468 du 10 décembre 2005 et textes modificatifs, décret n° 16-66 pour le document tenant lieu de facture), à vérifier. Fiscalité : couche fiscale ci-dessus.
+
+1. **Numérotation** : un numéro n'est attribué qu'à l'**émission** (un brouillon n'a pas de numéro), sans trou ni doublon, par organisation et par série (préfixe et remise à zéro annuelle configurables). Compteur verrouillé en base (`SELECT … FOR UPDATE`) et contrainte d'unicité ; testé sous concurrence.
+2. **Calculs serveur** : ligne = quantité (millièmes) × prix unitaire (centimes) − remise ; taxe par ligne via une règle vérifiée ; totaux HT, taxes par taux, TTC recalculés par le serveur, jamais repris du navigateur.
+3. **Traitement fiscal par ligne** — choix explicite obligatoire :
+   - `taxed` : taux issu d'une règle **vérifiée** (référence et version conservées) ;
+   - `exempt` : opération exonérée, avec **motif obligatoire** et référence du texte si connue ;
+   - `not_subject` : vendeur non assujetti.
+   Si le profil fiscal de l'entreprise est inconnu, MIZANIA ne choisit pas à sa place : l'utilisateur doit compléter son profil ou choisir explicitement, et la facture affiche ce qui reste à vérifier.
+4. **Contrôles de cohérence avant émission** : au moins une ligne ; quantités et prix valides ; client identifié ; échéance ≥ date ; totaux recalculés ; traitement fiscal choisi pour chaque ligne ; **mentions** de `invoice_mention_rules` en vigueur : manquante + mention `verified` → **blocage** ; manquante + mention `to_verify` → **avertissement explicite** (l'utilisateur peut émettre en connaissance de cause).
+5. **Conservation** : à l'émission, la facture est **figée** (instantané des identités vendeur/acheteur, lignes, taux et versions des règles, résultat des contrôles), le PDF est généré côté serveur et stocké avec son empreinte SHA-256. Une facture émise n'est plus modifiable ; une erreur se corrige par annulation / facture d'avoir (pratique à confirmer dans les textes). Durée de conservation : à déterminer d'après les textes (commerce, fiscalité, comptabilité).
+6. **Statuts** : brouillon → émise/envoyée → payée (partiellement/totalement, via les encaissements) ; en retard (calculé à partir de l'échéance) ; annulée.
+
+## 8 ter. Emails transactionnels
+
+Interface `Mailer` (`send({ to, subject, text, html })`) avec trois adaptateurs : **console** (développement/tests), **Resend** et **Brevo** (API HTTP, sans SDK). Choix par variable d'environnement. Usages : vérification de l'adresse email, confirmation de création de compte, réinitialisation du mot de passe, notifications importantes. Les emails ne contiennent jamais de données financières détaillées, seulement un lien vers l'application.
+
+## 8 quater. Données personnelles et IA
+
+Voir `docs/CONFORMITE.md`. Conséquences techniques prévues :
+- l'assistant IA est **désactivé par défaut pour chaque organisation** ; son propriétaire l'active explicitement après une information claire (données envoyées à un fournisseur, potentiellement hors d'Algérie) ;
+- **minimisation** : l'IA reçoit des agrégats et les seules lignes nécessaires à la question, pas l'intégralité de la base ;
+- export et suppression des données d'une organisation (droits des personnes) ; journal d'audit ; durées de conservation paramétrables une fois fixées.
+
 ## 9. Plan de développement par étapes
 
 | Phase | Contenu | Statut |
 |---|---|---|
 | 1 | Analyse, architecture, squelette du projet, outils (lint, typecheck, tests), module monétaire, configuration validée, identité visuelle de base | ✅ |
 | 2 | Base de données : schéma identité + organisations + contacts + transactions + catégories, migrations, RLS forcée, contexte d'organisation | ✅ |
-| 3 | Authentification : inscription, connexion, déconnexion, mot de passe oublié/reset, profil, rate limit ; onboarding de l'activité | ⏳ |
+| 2 bis | Référentiel réglementaire : sources officielles, catalogue des taxes, règles fiscales versionnées, mentions de facture configurables, profil fiscal, résolveur de règles « sans valeur par défaut », amorçage « à vérifier » | ✅ |
+| 3 | Authentification : inscription, **vérification d'email**, connexion, déconnexion, mot de passe oublié/reset, profil, rate limit ; `Mailer` (console/Resend/Brevo) ; onboarding de l'activité (dont profil fiscal facultatif) | ⏳ |
 | 4 | Landing page, avertissement, layout de l'espace connecté, dashboard (données réelles + états vides) | ⏳ |
 | 5 | Recettes / dépenses (CRUD, recherche, filtres, tri, pagination) | ⏳ |
 | 6 | Clients / fournisseurs (fiche, historique, solde) | ⏳ |
@@ -263,9 +297,11 @@ UI (chat) ─► /api/ai/chat ─► AiService ─► AIProvider (interface)
 
 ## Informations manquantes (à fournir — je ne les invente pas)
 
-1. **Nomenclature SCF officielle** (texte de l'arrêté du 26 juillet 2008 / JO) à importer et à faire vérifier.
-2. **Mentions obligatoires des factures** en Algérie (texte de référence à jour : Code des procédures fiscales / textes DGI applicables).
-3. **Taux et seuils fiscaux** en vigueur (TVA, IFU, IBS/IRG, etc.) avec leurs textes sources et dates d'effet — à saisir dans `tax_rules` via l'administration.
-4. **Hébergement & conformité** : exigences effectives de la loi 18-07 pour votre cas.
-5. **Fournisseur d'email** transactionnel pour la réinitialisation de mot de passe en production.
-6. **Clé API IA** (côté serveur) pour activer MIZANIA AI.
+Les sites officiels (joradp.dz, mfdgi.gov.dz, commerce.gov.dz, anpdp.dz) ne sont **pas accessibles** depuis l'environnement de développement : aucune vérification à la source n'a pu être faite. Toutes les références sont enregistrées au statut « à vérifier ».
+
+1. **Nomenclature SCF officielle** : le document fourni (présentation du ministère des Finances, 2 pages) liste les textes mais ne contient pas la nomenclature. Il faut le texte de l'**arrêté du 26 juillet 2008** (annexe nomenclature et règles de fonctionnement des comptes), idéalement le JO en PDF.
+2. **Décret exécutif n° 05-468** (facture) et ses modifications, **décret n° 16-66**, **décret n° 09-110** (comptabilité informatisée) : textes intégraux pour valider les mentions et les exigences logicielles.
+3. **Taux et seuils fiscaux** (TVA, IBS, IRG, TAP, IFU) : texte source, article, date d'effet de chaque règle — saisie via l'administration (Phase 10) ou fichier à importer.
+4. **Fournisseur d'email** : Resend ou Brevo (compte vérifié, domaine d'envoi, clé API en variable d'environnement).
+5. **Clé API IA** (côté serveur).
+6. **Conformité données personnelles** : voir `docs/CONFORMITE.md`.

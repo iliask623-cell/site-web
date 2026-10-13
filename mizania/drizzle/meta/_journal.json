@@ -15,6 +15,20 @@
       "when": 1791895997791,
       "tag": "0001_force_rls",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791897070233,
+      "tag": "0002_reference_and_fiscal_layer",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791897071045,
+      "tag": "0003_tax_rules_no_overlap",
+      "breakpoints": true
     }
   ]
 }

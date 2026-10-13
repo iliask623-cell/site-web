@@ -8,7 +8,7 @@ export async function resetDatabase(): Promise<void> {
     throw new Error("Refus de vider une base qui n'est pas une base de test.");
   }
   await getDb().execute(sql`
-    truncate table transactions, categories, contacts, sessions, password_reset_tokens,
+    truncate table tax_rules, invoice_mention_rules, taxes, official_sources, transactions, categories, contacts, sessions, password_reset_tokens,
       rate_limits, memberships, organizations, users restart identity cascade
   `);
 }
