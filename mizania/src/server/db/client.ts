@@ -14,8 +14,12 @@ cache.__mizaniaDb ??= {};
 export function getDb(): Database {
   const c = cache.__mizaniaDb!;
   if (!c.db) {
-    c.sql = postgres(env().DATABASE_URL, {
-      max: env().NODE_ENV === "production" ? 10 : 5,
+    const url = env().DATABASE_URL;
+    c.sql = postgres(url, {
+      // Fonctions serverless : peu de connexions par instance.
+      max: env().NODE_ENV === "production" ? 3 : 5,
+      // Un pooler en mode transaction (ex. Neon « -pooler ») ne garde pas les requêtes préparées.
+      prepare: !url.includes("-pooler"),
       // Pas de journalisation des requêtes (elles contiennent des données financières).
       onnotice: () => {},
     });

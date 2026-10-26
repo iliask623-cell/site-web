@@ -1,0 +1,14 @@
+# Configuration Netlify (dossier de base du projet : « mizania »).
+# Netlify détecte Next.js et utilise automatiquement son adaptateur.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# En production uniquement : applique les migrations de base de données avant
+# la construction. Les aperçus (deploy previews) ne touchent jamais la base de production.
+[context.production]
+  command = "npm run db:migrate && npm run build"
