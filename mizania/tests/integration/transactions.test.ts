@@ -154,3 +154,29 @@ describe("tableau de bord", () => {
     expect((await getDashboard(a, "2026-03-15", 1)).year.income).toBe(0);
   });
 });
+
+describe("isolation même si la RLS était contournée (mauvaise configuration d'hébergement)", () => {
+  it("le code filtre aussi par organisation", async () => {
+    await resetDatabase();
+    const a = await newOrg("Alpha");
+    const b = await newOrg("Beta");
+    const { id } = await createTransaction(a, "income", input({ categoryName: "Secret A" }));
+    const { sql } = await import("drizzle-orm");
+    const tables = ["transactions", "categories"];
+    try {
+      // Simule un rôle qui ignorerait les politiques RLS.
+      for (const t of tables) await getDb().execute(sql.raw(`alter table ${t} disable row level security`));
+      expect(await getTransaction(b, id, "income")).toBeNull();
+      expect(await updateTransaction(b, id, "income", input({ amount: "1" }))).toBeNull();
+      expect(await deleteTransaction(b, id, "income")).toBe(false);
+      expect((await listTransactions(b, "income", filters())).total).toBe(0);
+      expect((await listCategories(b, "income")).map((c) => c.name)).not.toContain("Secret A");
+      const d = await getDashboard(b, "2026-03-15", 1);
+      expect(d.hasData).toBe(false);
+      expect(d.recent).toHaveLength(0);
+    } finally {
+      for (const t of tables) await getDb().execute(sql.raw(`alter table ${t} enable row level security`));
+    }
+    expect((await getTransaction(a, id, "income"))?.transaction.amountCents).toBe(12_000_000);
+  });
+});

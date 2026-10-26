@@ -8,6 +8,13 @@ import { assertCanWrite } from "./permissions";
 
 export const PAGE_SIZE = 20;
 
+/**
+ * Filtre explicite sur l'organisation, EN PLUS de la RLS : si le rôle de base
+ * de données contournait la RLS (mauvaise configuration d'hébergement),
+ * l'isolation resterait garantie par le code.
+ */
+const ownTx = (ctx: OrgContext) => eq(transactions.organizationId, ctx.organizationId);
+
 /** Trouve la catégorie (insensible à la casse) ou la crée. */
 async function resolveCategoryId(tx: Tx, ctx: OrgContext, direction: Direction, name: string | null) {
   if (!name) return null;
@@ -18,7 +25,7 @@ async function resolveCategoryId(tx: Tx, ctx: OrgContext, direction: Direction, 
   const [row] = await tx
     .select({ id: categories.id })
     .from(categories)
-    .where(and(eq(categories.direction, direction), sql`lower(${categories.name}) = lower(${name})`))
+    .where(and(eq(categories.organizationId, ctx.organizationId), eq(categories.direction, direction), sql`lower(${categories.name}) = lower(${name})`))
     .limit(1);
   return row.id;
 }
@@ -57,7 +64,7 @@ export async function updateTransaction(ctx: OrgContext, id: string, direction: 
     const [row] = await tx
       .update(transactions)
       .set(toRow(ctx, direction, input, categoryId))
-      .where(and(eq(transactions.id, id), eq(transactions.direction, direction)))
+      .where(and(ownTx(ctx), eq(transactions.id, id), eq(transactions.direction, direction)))
       .returning({ id: transactions.id });
     return row ?? null;
   });
@@ -68,7 +75,7 @@ export async function deleteTransaction(ctx: OrgContext, id: string, direction: 
   return withOrg(ctx.organizationId, async (tx) => {
     const rows = await tx
       .delete(transactions)
-      .where(and(eq(transactions.id, id), eq(transactions.direction, direction)))
+      .where(and(ownTx(ctx), eq(transactions.id, id), eq(transactions.direction, direction)))
       .returning({ id: transactions.id });
     return rows.length > 0;
   });
@@ -80,7 +87,7 @@ export async function getTransaction(ctx: OrgContext, id: string, direction: Dir
       .select({ transaction: transactions, categoryName: categories.name })
       .from(transactions)
       .leftJoin(categories, eq(categories.id, transactions.categoryId))
-      .where(and(eq(transactions.id, id), eq(transactions.direction, direction)))
+      .where(and(ownTx(ctx), eq(transactions.id, id), eq(transactions.direction, direction)))
       .limit(1);
     return row ?? null;
   });
@@ -91,7 +98,7 @@ export async function listCategories(ctx: OrgContext, direction: Direction) {
     tx
       .select({ id: categories.id, name: categories.name })
       .from(categories)
-      .where(and(eq(categories.direction, direction), isNull(categories.archivedAt)))
+      .where(and(eq(categories.organizationId, ctx.organizationId), eq(categories.direction, direction), isNull(categories.archivedAt)))
       .orderBy(asc(categories.name)),
   );
 }
@@ -101,7 +108,7 @@ function escapeLike(s: string) {
 }
 
 export async function listTransactions(ctx: OrgContext, direction: Direction, f: ListFilters) {
-  const where: SQL[] = [eq(transactions.direction, direction)];
+  const where: SQL[] = [ownTx(ctx), eq(transactions.direction, direction)];
   if (f.q) {
     const p = `%${escapeLike(f.q)}%`;
     where.push(or(ilike(transactions.label, p), ilike(transactions.description, p))!);

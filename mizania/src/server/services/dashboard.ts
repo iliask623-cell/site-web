@@ -28,6 +28,8 @@ export async function getDashboard(ctx: OrgContext, today: string, fiscalYearSta
   const fyStart = startOfFiscalYear(today, fiscalYearStartMonth);
   const seriesStart = addMonths(monthStart, -5);
 
+  // Filtre explicite en plus de la RLS (défense en profondeur).
+  const own = eq(transactions.organizationId, ctx.organizationId);
   return withOrg(ctx.organizationId, async (tx) => {
     const month = periodTotals(monthStart, nextMonth);
     const year = periodTotals(fyStart, nextMonth);
@@ -43,7 +45,8 @@ export async function getDashboard(ctx: OrgContext, today: string, fiscalYearSta
         settledIn: cents(sql`sum(${transactions.amountCents}) filter (where ${transactions.direction} = 'income' and ${transactions.status} = 'settled' and ${transactions.occurredOn} <= ${today})`),
         settledOut: cents(sql`sum(${transactions.amountCents}) filter (where ${transactions.direction} = 'expense' and ${transactions.status} = 'settled' and ${transactions.occurredOn} <= ${today})`),
       })
-      .from(transactions);
+      .from(transactions)
+      .where(own);
 
     const monthly = await tx
       .select({
@@ -52,7 +55,7 @@ export async function getDashboard(ctx: OrgContext, today: string, fiscalYearSta
         expense: cents(sql`sum(${transactions.amountCents}) filter (where ${transactions.direction} = 'expense')`),
       })
       .from(transactions)
-      .where(and(gte(transactions.occurredOn, seriesStart), lt(transactions.occurredOn, nextMonth), ne(transactions.status, "cancelled")))
+      .where(and(own, gte(transactions.occurredOn, seriesStart), lt(transactions.occurredOn, nextMonth), ne(transactions.status, "cancelled")))
       .groupBy(sql`1`);
     const byMonth = new Map(monthly.map((m) => [m.month, m]));
     const series = Array.from({ length: 6 }, (_, i) => {
@@ -72,6 +75,7 @@ export async function getDashboard(ctx: OrgContext, today: string, fiscalYearSta
       })
       .from(transactions)
       .leftJoin(categories, eq(categories.id, transactions.categoryId))
+      .where(own)
       .orderBy(desc(transactions.occurredOn), desc(transactions.createdAt))
       .limit(6);
 
@@ -82,7 +86,7 @@ export async function getDashboard(ctx: OrgContext, today: string, fiscalYearSta
       })
       .from(transactions)
       .leftJoin(categories, eq(categories.id, transactions.categoryId))
-      .where(and(eq(transactions.direction, "expense"), ne(transactions.status, "cancelled"), gte(transactions.occurredOn, fyStart), lt(transactions.occurredOn, nextMonth)))
+      .where(and(own, eq(transactions.direction, "expense"), ne(transactions.status, "cancelled"), gte(transactions.occurredOn, fyStart), lt(transactions.occurredOn, nextMonth)))
       .groupBy(sql`1`)
       .orderBy(sql`2 desc`)
       .limit(5);
