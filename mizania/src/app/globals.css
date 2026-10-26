@@ -27,6 +27,10 @@
   --color-canvas: #f6f5f1;
   --color-line: #e3e1da;
 
+  /* Séries de graphiques (validées : CVD, contraste, chroma). */
+  --color-series-income: #0f8f7c;
+  --color-series-expense: #c48a12;
+
   --color-positive: #157a4f;
   --color-negative: #b4352d;
   --color-warning: #a8650a;

@@ -7,10 +7,12 @@ export async function resetDatabase(): Promise<void> {
   if (!process.env.DATABASE_URL?.includes("_test")) {
     throw new Error("Refus de vider une base qui n'est pas une base de test.");
   }
-  await getDb().execute(sql`
-    truncate table tax_rules, invoice_mention_rules, taxes, official_sources, transactions, categories, contacts, sessions, password_reset_tokens,
-      rate_limits, memberships, organizations, users restart identity cascade
-  `);
+  // Toutes les tables du schéma public (sauf le journal des migrations).
+  const tables = await getDb().execute<{ tablename: string }>(
+    sql`select tablename from pg_tables where schemaname = 'public'`,
+  );
+  const list = tables.map((t) => `"${t.tablename}"`).join(", ");
+  if (list) await getDb().execute(sql.raw(`truncate table ${list} restart identity cascade`));
 }
 
 let counter = 0;

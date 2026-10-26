@@ -17,7 +17,10 @@ pas un expert-comptable, un commissaire aux comptes ni les sources officielles.
 | 1 | Architecture, squelette, outillage, module monétaire, identité visuelle de base | ✅ testée |
 | 2 | Base de données : identité, organisations, contacts, catégories, recettes/dépenses, isolation RLS | ✅ testée |
 | 2 bis | Référentiel réglementaire versionné (sources, taxes, règles fiscales, mentions de facture), résolveur fiscal sans valeur par défaut | ✅ testée |
-| 3 → 10 | Authentification, dashboard, CRUD, facturation, moteur SCF, IA, exports… | ⏳ à venir |
+| 3 | Inscription, connexion, déconnexion, mot de passe oublié / réinitialisation, vérification d'email, profil, onboarding | ✅ testée |
+| 4 | Landing page, avertissement, confidentialité (provisoire), tableau de bord sur données réelles | ✅ testée |
+| 5 | Recettes / dépenses : création, modification, suppression, recherche, filtres, tri, pagination | ✅ testée |
+| 6 → 10 | Authentification, dashboard, CRUD, facturation, moteur SCF, IA, exports… | ⏳ à venir |
 
 Rien de ce qui n'est pas marqué ✅ n'est disponible dans l'application.
 

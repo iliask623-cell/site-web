@@ -33,6 +33,7 @@ export const users = pgTable(
     fullName: text("full_name").notNull(),
     locale: localeEnum("locale").notNull().default("fr"),
     isPlatformAdmin: boolean("is_platform_admin").notNull().default(false),
+    emailVerifiedAt: timestamp("email_verified_at", { withTimezone: true }),
     ...timestamps,
   },
   (t) => [
@@ -56,6 +57,14 @@ export const activityTypeEnum = pgEnum("activity_type", [
   "commerce",
   "production",
   "freelance",
+  "other",
+]);
+
+export const mainGoalEnum = pgEnum("main_goal", [
+  "track_finances",
+  "invoicing",
+  "understand_accounting",
+  "prepare_for_accountant",
   "other",
 ]);
 
@@ -92,6 +101,8 @@ export const organizations = pgTable(
     taxRegimeCode: text("tax_regime_code"),
     fiscalYearStartMonth: smallint("fiscal_year_start_month").notNull().default(1),
     /** Données de démonstration : jamais mélangées aux données réelles. */
+    /** Objectif principal déclaré à l'onboarding (sert à personnaliser l'accueil). */
+    mainGoal: mainGoalEnum("main_goal"),
     isDemo: boolean("is_demo").notNull().default(false),
     onboardingCompletedAt: timestamp("onboarding_completed_at", { withTimezone: true }),
     ...timestamps,
@@ -162,3 +173,18 @@ export const rateLimits = pgTable("rate_limits", {
 });
 
 export { timestamps };
+
+export const emailVerificationTokens = pgTable(
+  "email_verification_tokens",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tokenHash: text("token_hash").notNull(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    usedAt: timestamp("used_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex("email_verification_tokens_hash_key").on(t.tokenHash)],
+);
